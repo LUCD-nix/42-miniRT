@@ -3,5 +3,5 @@ a.out
 *test*
 .*.sw*
 *.o
-minishell
+miniRT
 rl.supp
