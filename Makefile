@@ -1,23 +1,34 @@
-NAME = minishell
+NAME = miniRT
 
-CFILES = src/**/*.c
+CFILES := src/main.c       \
+	src/shapes/box.c       \
+	src/shapes/cylinder.c  \
+	src/shapes/plane.c     \
+	src/shapes/rectangle.c \
+	src/shapes/sphere.c    \
+	src/vec3/abs3.c        \
+	src/vec3/diff3.c       \
+	src/vec3/dot3.c        \
+	src/vec3/norm3.c
 
 OBJS := $(CFILES:.c=.o)
 
 CC = cc
 
 LIBFTDIR = libft/
+MLIBXDIR = minilibx-linux/
 
 LIBFT := ${LIBFTDIR}libft.a
+MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
 CFLAGS = -Wall -Wextra -Werror -ffast-math -ggdb3
 
-LFLAGS := -I${LIBFTDIR} -lmath
+LFLAGS := -I${LIBFTDIR} -I${MLIBXDIR} -lXext -lX11 -lm
 
 all: ${NAME}
 
-${NAME}:  ${OBJS} ${LIBFT}
-	${CC} ${OBJS} ${LIBFT} ${LFLAGS} -o ${NAME}
+${NAME}:  ${OBJS} ${LIBFT} ${MLIBX}
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${MLIBX_OS} ${LFLAGS} -o ${NAME}
 
 %.o: %.c minishell.h
 	${CC} -c ${CFLAGS} $< -o $@
@@ -25,12 +36,16 @@ ${NAME}:  ${OBJS} ${LIBFT}
 ${LIBFT}:
 	cd ${LIBFTDIR} && make bonus
 
+${MLIBX}:
+	cd ${MLIBXDIR} && ./configure
+
 clean:
 	cd ${LIBFTDIR} && make clean
 	rm -f ${OBJS}
 
 fclean: clean
 	cd ${LIBFTDIR} && make fclean
+	cd ${MLIBXDIR} && ./configure clean
 	rm -f ${NAME}
 
 re: fclean all
