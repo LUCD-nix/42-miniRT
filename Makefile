@@ -23,7 +23,7 @@ MLIBXDIR = minilibx-linux/
 LIBFT := ${LIBFTDIR}libft.a
 MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
-CFLAGS = -Wall -Wextra -Werror -O0 -ggdb3 \
+CFLAGS = -Wall -Wextra -Werror -O3 -ggdb3 \
 	-ffast-math \
 	-funsafe-math-optimizations \
 	-fno-math-errno \

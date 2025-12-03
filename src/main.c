@@ -34,17 +34,18 @@ typedef struct s_img
 
 static inline t_vec3	get_normal(
 							t_vec3 pos,
-							float (*sdf)(t_vec3, t_shape),
-							t_shape ball)
+							float (*sdf)(t_vec3))
+
 {
 	t_vec3	normal;
 	float	h;
 
+	// Needs to be smaller than SURFACE_DIST for sdf(pos) ~= 0
 	h = 0.01f;
 	normal = (t_vec3){
-		sdf(add3(pos, (t_vec3){h, 0, 0}), ball),
-		sdf(add3(pos, (t_vec3){0, h, 0}), ball),
-		sdf(add3(pos, (t_vec3){0, 0, h}), ball),
+		sdf(add3(pos, (t_vec3){h, 0, 0})),
+		sdf(add3(pos, (t_vec3){0, h, 0})),
+		sdf(add3(pos, (t_vec3){0, 0, h})),
 	};
 	return (norm3(normal));
 }
@@ -58,23 +59,45 @@ static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+static inline float	temp_sdf(t_vec3 point)
+{
+	t_shape	ball1;
+	t_shape	ball2;
+	t_shape	ball3;
+	float	d1;
+	float	d2;
+
+	ball1.position = (t_vec3){2.0f, 0.0f, 0.0f};
+	ball1.type = SPHERE;
+	ball1.sphere.radius = 1.f;
+	
+	ball2 = ball1;
+	ball2.position = (t_vec3){1.5f, 0.5f, 0.5f};
+
+	ball3 = ball1;
+	ball3.position = (t_vec3){1.5f, -0.5f, -0.5f};
+
+	d1 = sphere_sdf(point, ball1);
+	d2 = sphere_sdf(point, ball2);
+	float d3 = sphere_sdf(point, ball3);
+	d3 = fmaxf(-d2, -sphere_sdf(point, ball3));
+
+	return(fmaxf(d1, d3));
+}
+
 static inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction)
 {
 	float	dS;
 	t_vec3	tmp;
 	t_vec3	normal;
-	t_shape	ball;
 	size_t	i;
 
-	ball.position = (t_vec3){2.0f, 0.0f, 0.0f};
-	ball.type = SPHERE;
-	ball.sphere.radius = 1.f;
-	dS = sphere_sdf(origin, ball);
+	dS = temp_sdf(origin);
 	tmp = add3(origin, fmult3(direction, dS));
 	i = -1;
 	while (++i < MAX_STEPS)
 	{
-		dS = sphere_sdf(tmp, ball);
+		dS = temp_sdf(tmp);
 		if (fabsf(dS) < SURFACE_DIST)
 			break ;
 		tmp = add3(tmp, fmult3(direction, dS));
@@ -82,9 +105,9 @@ static inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction)
 	// background
 	if (i == MAX_STEPS)
 		return (0);
-	printf("sphere:{ %f, %f, %f }\n", tmp.x, tmp.y, tmp.z);
-	normal = get_normal(tmp, &sphere_sdf, ball);
-	printf("normal:{ %f, %f, %f }\n", normal.x, normal.y, normal.z);
+	// printf("sphere:{ %f, %f, %f }\n", tmp.x, tmp.y, tmp.z);
+	normal = get_normal(tmp, &temp_sdf);
+	// printf("normal:{ %f, %f, %f }\n", normal.x, normal.y, normal.z);
 	float diffuse = fmaxf(
 		dot3(normal, (t_vec3){0.f, 1.f, 0.f}),
 		0.0f
