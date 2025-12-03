@@ -1,22 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot3.c                                             :+:      :+:    :+:   */
+/*   fmult3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 14:36:26 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/28 14:36:26 by lucorrei         ###   ########.fr       */
+/*   Created: 2025/12/01 12:28:22 by lucorrei          #+#    #+#             */
+/*   Updated: 2025/12/01 12:30:04 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline float	dot3(t_vec3 a, t_vec3 b)
+inline t_vec3	fmult3(t_vec3 v, float s)
 {
-	return (
-		a.x * b.x
-		+ a.y * b.y
-		+ a.z * b.z
-	);
+	return ((t_vec3){v.x * s, v.y * s, v.z * s});
 }
-

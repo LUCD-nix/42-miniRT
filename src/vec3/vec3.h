@@ -6,7 +6,7 @@
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:36:45 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/28 14:36:45 by lucorrei         ###   ########.fr       */
+/*   Updated: 2025/12/01 12:28:16 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ typedef struct s_vec3
 	float	z;
 }	t_vec3;
 
-// gives a positive vector
-t_vec3	abs3(t_vec3 v);
-
 // gives the length of the vector
 float	length3(t_vec3 v);
 
 float	dot3(t_vec3 a, t_vec3 b);
+t_vec3	add3(t_vec3 a, t_vec3 b);
+t_vec3	fmult3(t_vec3 v,float s);
 t_vec3	norm3(t_vec3 v);
 t_vec3	diff3(t_vec3 a, t_vec3 b);
 

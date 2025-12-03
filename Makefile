@@ -1,14 +1,16 @@
 NAME = miniRT
 
-CFILES := src/main.c       \
-	src/shapes/box.c       \
-	src/shapes/cylinder.c  \
-	src/shapes/plane.c     \
+CFILES := src/main.c \
+	src/shapes/box.c \
+	src/shapes/cylinder.c \
+	src/shapes/plane.c \
 	src/shapes/rectangle.c \
-	src/shapes/sphere.c    \
-	src/vec3/abs3.c        \
-	src/vec3/diff3.c       \
-	src/vec3/dot3.c        \
+	src/shapes/sphere.c \
+	src/vec3/length3.c \
+	src/vec3/add3.c \
+	src/vec3/diff3.c \
+	src/vec3/dot3.c \
+	src/vec3/fmult3.c \
 	src/vec3/norm3.c
 
 OBJS := $(CFILES:.c=.o)
@@ -21,7 +23,11 @@ MLIBXDIR = minilibx-linux/
 LIBFT := ${LIBFTDIR}libft.a
 MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
-CFLAGS = -Wall -Wextra -Werror -ffast-math -ggdb3
+CFLAGS = -Wall -Wextra -Werror -O0 -ggdb3 \
+	-ffast-math \
+	-funsafe-math-optimizations \
+	-fno-math-errno \
+	-fassociative-math
 
 LFLAGS := -I${LIBFTDIR} -I${MLIBXDIR} -lXext -lX11 -lm
 
