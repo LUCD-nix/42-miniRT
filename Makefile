@@ -1,17 +1,22 @@
 NAME = miniRT
 
 CFILES := src/main.c \
+	src/mat3/mat3mat3.c \
+	src/mat3/mat3vec.c \
+	src/mat3/rot_mat3.c \
+	src/mat3/transp3.c \
 	src/shapes/box.c \
 	src/shapes/cylinder.c \
 	src/shapes/plane.c \
-	src/shapes/rectangle.c \
 	src/shapes/sphere.c \
-	src/vec3/length3.c \
+	src/vec3/abs3.c \
 	src/vec3/add3.c \
 	src/vec3/diff3.c \
 	src/vec3/dot3.c \
 	src/vec3/fmult3.c \
-	src/vec3/norm3.c
+	src/vec3/length3.c \
+	src/vec3/norm3.c \
+	src/vec3/trans_rot3.c
 
 OBJS := $(CFILES:.c=.o)
 

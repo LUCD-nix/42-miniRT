@@ -13,6 +13,7 @@
 #ifndef SHAPES_H
 # define SHAPES_H
 # include "../vec3/vec3.h"
+# include "../mat3/mat3.h"
 
 struct s_sphere
 {
@@ -21,6 +22,7 @@ struct s_sphere
 
 struct s_box
 {
+	t_mat3	rotation;
 	float	width;
 	float	length;
 	float	height;

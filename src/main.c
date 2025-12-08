@@ -17,9 +17,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_STEPS 100
-#define SURFACE_DIST 0.00001f
-#define SCREEN_X 1920
-#define SCREEN_Y 1080
+#define SURFACE_DIST 0.001f
+// #define SCREEN_X 1920
+// #define SCREEN_Y 1080
+#define SCREEN_X 854
+#define SCREEN_Y 480
 // #define SCREEN_X 160
 // #define SCREEN_Y 90
 
@@ -61,28 +63,33 @@ static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
 
 static inline float	temp_sdf(t_vec3 point)
 {
-	t_shape	ball1;
-	t_shape	ball2;
-	t_shape	ball3;
-	float	d1;
-	float	d2;
+	t_shape	box1;
+	t_shape	neg_sphere;
+	// t_shape	neg_sphere2;
 
-	ball1.position = (t_vec3){2.0f, 0.0f, 0.0f};
-	ball1.type = SPHERE;
-	ball1.sphere.radius = 1.f;
-	
-	ball2 = ball1;
-	ball2.position = (t_vec3){1.5f, 0.5f, 0.5f};
+	neg_sphere = (t_shape){
+		.type = SPHERE,
+		.position = (t_vec3){1.0f, 0.1f, 0},
+		.sphere.radius = 0.5f
+	};
+	// neg_sphere2 = (t_shape){
+	// 	.type = SPHERE,
+	// 	.position = (t_vec3){2.8f, 0.f, -0.2f},
+	// 	.sphere.radius = 0.5f
+	// };
 
-	ball3 = ball1;
-	ball3.position = (t_vec3){1.5f, -0.5f, -0.5f};
-
-	d1 = sphere_sdf(point, ball1);
-	d2 = sphere_sdf(point, ball2);
-	float d3 = sphere_sdf(point, ball3);
-	d3 = fmaxf(-d2, -sphere_sdf(point, ball3));
-
-	return(fmaxf(d1, d3));
+	box1 = (t_shape) {
+		.type = BRICK,
+		.position = (t_vec3) { 3.0f, -1.f, 0 },
+		.box = (struct s_box) {
+			// FIXME : this is spinning on the wrong axis AFAICT
+			.rotation = rot_mat3(0, 0, M_PI_4),
+			.width = 2.0f,
+			.height = 1.0f,
+			.length = 1.0f
+		}
+	};
+	return (fmaxf(box_sdf(point, box1), -sphere_sdf(point, neg_sphere)));
 }
 
 static inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction)
@@ -160,6 +167,7 @@ int	main(void)
 			put_pixel_to_img(&data, j, i, colour);
 		}
 	}
+	printf("finished rendering!\n");
 	mlx_put_image_to_window(mlx, window, data.img, 0, 0);
 	mlx_loop(mlx);
 }
