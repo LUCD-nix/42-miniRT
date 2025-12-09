@@ -18,10 +18,10 @@
 #include <stdlib.h>
 #define MAX_STEPS 100
 #define SURFACE_DIST 0.001f
-// #define SCREEN_X 1920
-// #define SCREEN_Y 1080
-#define SCREEN_X 854
-#define SCREEN_Y 480
+#define SCREEN_X 1920
+#define SCREEN_Y 1080
+// #define SCREEN_X 854
+// #define SCREEN_Y 480
 // #define SCREEN_X 160
 // #define SCREEN_Y 90
 
@@ -80,10 +80,9 @@ static inline float	temp_sdf(t_vec3 point)
 
 	box1 = (t_shape) {
 		.type = BRICK,
-		.position = (t_vec3) { 3.0f, -1.f, 0 },
+		.position = (t_vec3) { 3.0f, 0.f, 0.f },
 		.box = (struct s_box) {
-			// FIXME : this is spinning on the wrong axis AFAICT
-			.rotation = rot_mat3(0, 0, M_PI_4),
+			.rotation = rot_mat3(M_PI_4, 0, M_PI_4),
 			.width = 2.0f,
 			.height = 1.0f,
 			.length = 1.0f

@@ -14,27 +14,26 @@
 // Here we're using extrinsic rotation, angles stay fixed w/ original coord
 // system https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
 
-inline t_mat3 rot_mat3(float g, float b, float a)
+inline t_mat3 rot_mat3(float a, float b, float g)
 {
 	t_mat3	rot_x;
 	t_mat3	rot_y;
 	t_mat3	rot_z;
 
 	rot_x = (t_mat3){.rows = {
-		(t_vec3) {cosf(g), -sinf(g), 0},
-		(t_vec3) {sinf(g), cosf(g), 0},
-		(t_vec3) {0, 0, 1}
+		(t_vec3) {1, 0, 0},
+		(t_vec3) {0, cosf(a), -sinf(a)},
+		(t_vec3) {0, sinf(a), cosf(a)}
 	}};
-
 	rot_y = (t_mat3){.rows = {
 		(t_vec3) {cosf(b), 0, sinf(b)},
 		(t_vec3) {0, 1, 0},
 		(t_vec3) {-sinf(b), 0, cosf(b)}
 	}};
 	rot_z = (t_mat3){.rows = {
-		(t_vec3) {1, 0, 0},
-		(t_vec3) {0, cosf(a), -sinf(a)},
-		(t_vec3) {0, sinf(a), cosf(a)}
+		(t_vec3) {cosf(g), -sinf(g), 0},
+		(t_vec3) {sinf(g), cosf(g), 0},
+		(t_vec3) {0, 0, 1}
 	}};
 	// TODO : this is probably not optimized away, consider writing manually
 	return (mat3mat3(rot_x, mat3mat3(rot_y, rot_z)));
