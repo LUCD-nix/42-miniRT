@@ -34,6 +34,7 @@ t_vec3	abs3(t_vec3 v);
 
 float	dot3(t_vec3 a, t_vec3 b);
 t_vec3	add3(t_vec3 a, t_vec3 b);
+t_vec3	max3f(t_vec3 v, float s);
 t_vec3	fmult3(t_vec3 v,float s);
 t_vec3	norm3(t_vec3 v);
 t_vec3	diff3(t_vec3 a, t_vec3 b);

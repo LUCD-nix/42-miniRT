@@ -13,6 +13,7 @@ CFILES := src/main.c \
 	src/vec3/add3.c \
 	src/vec3/diff3.c \
 	src/vec3/dot3.c \
+	src/vec3/max3f.c \
 	src/vec3/fmult3.c \
 	src/vec3/length3.c \
 	src/vec3/norm3.c \
