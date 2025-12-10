@@ -40,7 +40,7 @@ LFLAGS := -I${LIBFTDIR} -I${MLIBXDIR} -lXext -lX11 -lm
 all: ${NAME}
 
 ${NAME}:  ${OBJS} ${LIBFT} ${MLIBX}
-	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${MLIBX_OS} ${LFLAGS} -o ${NAME}
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${LFLAGS} -o ${NAME}
 
 %.o: %.c minishell.h
 	${CC} -c ${CFLAGS} $< -o $@
