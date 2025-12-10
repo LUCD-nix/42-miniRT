@@ -11,15 +11,6 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline static t_vec3	add3f(t_vec3 v, float s)
-{
-	return ((t_vec3){
-		v.x + s,
-		v.y + s,
-		v.z + s
-	});
-}
-
 inline static t_vec3	max3f(t_vec3 v, float s)
 {
 	return ((t_vec3){
@@ -33,15 +24,16 @@ inline static t_vec3	max3f(t_vec3 v, float s)
 inline float	box_sdf(t_vec3 p, struct s_shape box)
 {
 	t_vec3	q;
+	float	inside;
+	float	outside;
 
 	p = trans_rot3(p, box.position, box.box.rotation);
 	q = diff3(abs3(p), (t_vec3) {
-		box.box.width / 2,
-		box.box.length / 2,
-		box.box.height / 2
+		box.box.lx / 2,
+		box.box.ly / 2,
+		box.box.lz / 2
 	});
-	return (length3(add3f(
-		max3f(q, 0.0),
-		fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0f)
-	)));
+	outside = length3(max3f(q, 0.0f));
+	inside = fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0f);
+	return (outside + inside);
 }
