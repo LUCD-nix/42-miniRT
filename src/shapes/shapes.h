@@ -23,9 +23,9 @@ struct s_sphere
 struct s_box
 {
 	t_mat3	rotation;
-	float	width;
-	float	length;
-	float	height;
+	float	lx;
+	float	ly;
+	float	lz;
 };
 
 struct s_cylinder

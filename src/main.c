@@ -9,6 +9,7 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "mat3/mat3.h"
 #include "shapes/shapes.h"
 #include "vec3/vec3.h"
 #include "../minilibx-linux/mlx.h"
@@ -17,7 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_STEPS 100
-#define SURFACE_DIST 0.001f
+#define SURFACE_DIST 0.00001f
 #define SCREEN_X 1920
 #define SCREEN_Y 1080
 // #define SCREEN_X 854
@@ -34,16 +35,15 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-static inline t_vec3	get_normal(
-							t_vec3 pos,
+static inline t_vec3	get_normal( t_vec3 pos,
 							float (*sdf)(t_vec3))
 
 {
 	t_vec3	normal;
 	float	h;
 
-	// Needs to be smaller than SURFACE_DIST for sdf(pos) ~= 0
-	h = 0.01f;
+	// Needs to be bigger than SURFACE_DIST for sdf(pos) ~= 0
+	h = 0.001f;
 	normal = (t_vec3){
 		sdf(add3(pos, (t_vec3){h, 0, 0})),
 		sdf(add3(pos, (t_vec3){0, h, 0})),
@@ -63,32 +63,26 @@ static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
 
 static inline float	temp_sdf(t_vec3 point)
 {
-	t_shape	box1;
 	t_shape	neg_sphere;
-	// t_shape	neg_sphere2;
 
 	neg_sphere = (t_shape){
 		.type = SPHERE,
-		.position = (t_vec3){1.0f, 0.1f, 0},
-		.sphere.radius = 0.5f
+		.position = (t_vec3){2.0f, 0.0f, 0.f},
+		.sphere.radius = 1.5f
 	};
-	// neg_sphere2 = (t_shape){
-	// 	.type = SPHERE,
-	// 	.position = (t_vec3){2.8f, 0.f, -0.2f},
-	// 	.sphere.radius = 0.5f
-	// };
 
+	t_shape	box1;
 	box1 = (t_shape) {
 		.type = BRICK,
 		.position = (t_vec3) { 3.0f, 0.f, 0.f },
 		.box = (struct s_box) {
-			.rotation = rot_mat3(M_PI_4, 0, M_PI_4),
-			.width = 2.0f,
-			.height = 1.0f,
-			.length = 1.0f
+			.rotation = rot_mat3(M_PI_4, 0.f, M_PI_4),
+			.lx = 2.0f,
+			.ly = 2.0f,
+			.lz = 2.0f
 		}
 	};
-	return (fmaxf(box_sdf(point, box1), -sphere_sdf(point, neg_sphere)));
+	return (fmaxf(-sphere_sdf(point, neg_sphere), box_sdf(point, box1)));
 }
 
 static inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction)
@@ -156,7 +150,6 @@ int	main(void)
 	}
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 		&data.line_length, &data.endian);
-
 	for (size_t i = 0; i < SCREEN_Y; i++)
 	{
 		for (size_t j = 0; j < SCREEN_X; j++)
