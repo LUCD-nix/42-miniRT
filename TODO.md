@@ -17,3 +17,8 @@ Engine:
         - https://iquilezles.org/articles/rmshadows/
     - [ ] Inigo has intersection functions, could be a performance hail
     mary if it gets too bad but could take a while to implement
+    - [w] Install perf to see the hot loops in the code
+        - [x] needs bison
+        - [x] needs flex
+        - [ ] needs a bunch of libraries i am a bit lazy to fetch
+            - [ ] also needs them in INCLUDES at runtime
