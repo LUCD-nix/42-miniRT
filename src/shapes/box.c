@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float	box_sdf(t_vec3 p, struct s_shape box)
+inline float	box_sdf(t_vec3 p, union u_shape shape)
 {
 	t_vec3	q;
 	float	inside;
 	float	outside;
 
-	p = trans_rot3(p, box.position, box.box.rotation);
+	p = trans_rot3(p, shape.box.position, shape.box.rotation);
 	q = diff3(abs3(p), (t_vec3) {
-		box.box.lx / 2,
-		box.box.ly / 2,
-		box.box.lz / 2
+		shape.box.lx / 2,
+		shape.box.ly / 2,
+		shape.box.lz / 2
 	});
 	outside = length3(max3f(q, 0.0f));
 	inside = fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0f);

@@ -8,11 +8,10 @@ Engine:
         which would have to be used at sdf call site
             - might need determinant soon.
         - would make translating Inigo's code easier
-    - [ ] Start work on sdf call structure
-        - Linked list is hard to do without malloc
-        - So the choice is a static array of structs or a static structure
+    - [w] Start work on sdf call structure
+        - [x] So the choice is a static array of structs or a static structure
         of arrays;
-            - second option means shapes.h refactor
+            - [x] second option means shapes.h refactor
     - [ ] Start work on smooth shading, using raymarching
         - https://iquilezles.org/articles/rmshadows/
     - [ ] Inigo has intersection functions, could be a performance hail
@@ -22,3 +21,4 @@ Engine:
         - [x] needs flex
         - [ ] needs a bunch of libraries i am a bit lazy to fetch
             - [ ] also needs them in INCLUDES at runtime
+    - [ ] refactor drawing funcs in their own module;

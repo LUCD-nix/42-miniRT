@@ -15,14 +15,20 @@
 # include "../vec3/vec3.h"
 # include "../mat3/mat3.h"
 
+# ifndef MAX_SHAPES
+#  define MAX_SHAPES 10
+# endif //MAX_SHAPES
+
 struct s_sphere
 {
+	t_vec3	position;
 	float	radius;
 };
 
 struct s_box
 {
 	t_mat3	rotation;
+	t_vec3	position;
 	float	lx;
 	float	ly;
 	float	lz;
@@ -30,6 +36,8 @@ struct s_box
 
 struct s_cylinder
 {
+	t_vec3	position;
+	t_vec3	alignment;
 	float	radius;
 	float	height;
 };
@@ -40,28 +48,35 @@ struct s_plane
 	float	height;
 };
 
-typedef enum e_shape_tag
+union u_shape
 {
-	SPHERE,
-	CYLINDER,
-	PLANE,
-	BRICK
-}	t_shape_tag;
+	struct s_sphere		sphere;
+	struct s_box		box;
+	struct s_cylinder	cylinder;
+	struct s_plane		plane;
+};
 
-typedef struct s_shape
+// typedef enum e_shape_tag
+// {
+// 	SPHERE,
+// 	CYLINDER,
+// 	PLANE,
+// 	BOX
+// }	t_shape_tag;
+//
+typedef struct s_shapes
 {
-// TODO : we might be able to anonymize each shape struct, would be ergonomic
-	t_shape_tag			type;
-	t_vec3				position;
-	unsigned char		colour[3];
-	union
-	{
-		struct s_sphere		sphere;
-		struct s_box		box;
-		struct s_plane		plane;
-		struct s_cylinder	cylinder;
-	};
-}	t_shape;
+	union u_shape	shapes[MAX_SHAPES];
+	float			(*sdfs[MAX_SHAPES])(float, union u_shape);
+	float			(*combine[MAX_SHAPES])(float, float, float);
+	unsigned int	colours[MAX_SHAPES];
+}	t_shapes;
+
+// Signed distance functions;
+// adapted from : https://iquilezles.org/articles/distfunctions/
+float	sphere_sdf(t_vec3 point, union u_shape ball);
+float	plane_sdf(t_vec3 point, union u_shape surface);
+float	box_sdf(t_vec3 point, union u_shape box);
 
 float	sphere_sdf(t_vec3 point, t_shape ball);
 float	plane_sdf(t_vec3 point, t_shape surface);
