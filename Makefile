@@ -6,8 +6,10 @@ CFILES := src/main.c \
 	src/mat3/rot_mat3.c \
 	src/mat3/transp3.c \
 	src/shapes/box.c \
+	src/shapes/combining.c \
 	src/shapes/cylinder.c \
 	src/shapes/plane.c \
+	src/shapes/smooth_combining.c \
 	src/shapes/sphere.c \
 	src/vec3/abs3.c \
 	src/vec3/add3.c \

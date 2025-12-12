@@ -78,8 +78,14 @@ float	sphere_sdf(t_vec3 point, union u_shape ball);
 float	plane_sdf(t_vec3 point, union u_shape surface);
 float	box_sdf(t_vec3 point, union u_shape box);
 
-float	sphere_sdf(t_vec3 point, t_shape ball);
-float	plane_sdf(t_vec3 point, t_shape surface);
-float	box_sdf(t_vec3 point, t_shape box);
+// SDF combining operations (k is voided)
+float	op_union(float d1, float d2, float k);
+float	op_substraction(float d1, float d2, float k);
+float	op_intersection(float d1, float d2, float k);
+float	op_xor(float d1, float d2, float k);
 
+// Smooth combining operations(k is the smoothing)
+float	op_smooth_union(float d1, float d2, float k);
+float	op_smooth_substraction(float d1, float d2, float k);
+float	op_smooth_intersection(float d1, float d2, float k);
 #endif // SHAPES_H
