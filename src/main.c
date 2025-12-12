@@ -17,23 +17,9 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "window/window.h"
 #define MAX_STEPS 100
 #define SURFACE_DIST 0.00001f
-#define SCREEN_X 1920
-#define SCREEN_Y 1080
-// #define SCREEN_X 854
-// #define SCREEN_Y 480
-// #define SCREEN_X 160
-// #define SCREEN_Y 90
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
 
 static inline t_vec3	get_normal( t_vec3 pos,
 							float (*sdf)(t_vec3))
@@ -43,6 +29,8 @@ static inline t_vec3	get_normal( t_vec3 pos,
 	float	h;
 
 	// Needs to be bigger than SURFACE_DIST for sdf(pos) ~= 0
+	// Could go to a more accurate impl (Inigo Quilez)
+	// but would require more sdf calls
 	h = 0.001f;
 	normal = (t_vec3){
 		sdf(add3(pos, (t_vec3){h, 0, 0})),
@@ -129,27 +117,10 @@ int	main(void)
 	void	*mlx;
 	void	*window;
 	t_img	data;
+	
+	// Init window exits in case of problem
+	init_window(&mlx, &window, &data);
 
-	mlx = mlx_init();
-	if (mlx == NULL)
-		exit(EXIT_FAILURE);
-	window = mlx_new_window(mlx, SCREEN_X, SCREEN_Y, "miniRT");
-	if (window == NULL)
-	{
-		mlx_destroy_display(mlx);
-		free(mlx);
-		exit(EXIT_FAILURE);
-	}
-	data.img = mlx_new_image(mlx, SCREEN_X, SCREEN_Y);
-	if (data.img == NULL)
-	{
-		mlx_destroy_window(mlx, window);
-		mlx_destroy_display(mlx);
-		free(mlx);
-		exit(EXIT_FAILURE);
-	}
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
-		&data.line_length, &data.endian);
 	for (size_t i = 0; i < SCREEN_Y; i++)
 	{
 		for (size_t j = 0; j < SCREEN_X; j++)

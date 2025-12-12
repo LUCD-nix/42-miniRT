@@ -17,7 +17,8 @@ CFILES := src/main.c \
 	src/vec3/fmult3.c \
 	src/vec3/length3.c \
 	src/vec3/norm3.c \
-	src/vec3/trans_rot3.c
+	src/vec3/trans_rot3.c \
+	src/window/init_window.c
 
 OBJS := $(CFILES:.c=.o)
 
