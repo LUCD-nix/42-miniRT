@@ -46,22 +46,21 @@ int	main(void)
 	// Init window exits in case of problem
 	init_window(&mlx, &window, &data);
 
-	// Box
+	// Cylinder
 	objs.n_shapes = 2;
-	objs.shapes[0] = (union u_shape) {.box = (struct s_box){
-		.rotation = rot_mat3(M_PI_4, 0, M_PI_4),
-		.position = (t_vec3){3.0f, 0.0f, 0.f},
-		.lx = 2.0f,
-		.ly = 2.0f,
-		.lz = 2.0f
-	}};
-	objs.sdfs[0] = &box_sdf;
+	objs.shapes[0] = (union u_shape)(struct s_cylinder){
+		.alignment = rot_mat3(M_PI_2, 0.f, 0.f),
+		.position = (t_vec3) {3.f, 0.f, 0.f},
+		.radius = 1.f,
+		.height = 5.f
+	};
+	objs.sdfs[0] = &cylinder_sdf;
 
 	// neg_sphere
-	objs.shapes[1] = (union u_shape) {.sphere = (struct s_sphere){
+	objs.shapes[1] = (union u_shape)(struct s_sphere){
 		.position = (t_vec3){2.0f, 0.0f, 0.f},
 		.radius = 1.5f
-	}};
+	};
 	objs.sdfs[1] = &sphere_sdf;
 	objs.combine[1] = &op_substraction;
 
@@ -77,8 +76,8 @@ int	main(void)
 		}
 	}
 	clock_t end = clock();
-	double time_elapsed_in_seconds = (double)(end - start) / CLOCKS_PER_SEC;
-	printf("finished rendering in %lf seconds\n", time_elapsed_in_seconds);
+	double render_time_s = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("finished rendering in %lf seconds\n", render_time_s);
 	mlx_put_image_to_window(mlx, window, data.img, 0, 0);
 	mlx_loop(mlx);
 }

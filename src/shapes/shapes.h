@@ -36,8 +36,8 @@ struct s_box
 
 struct s_cylinder
 {
+	t_mat3	alignment;
 	t_vec3	position;
-	t_vec3	alignment;
 	float	radius;
 	float	height;
 };
@@ -79,6 +79,7 @@ typedef struct s_shapes
 float	sphere_sdf(t_vec3 point, union u_shape ball);
 float	plane_sdf(t_vec3 point, union u_shape surface);
 float	box_sdf(t_vec3 point, union u_shape box);
+float	cylinder_sdf(t_vec3 point, union u_shape cylinder);
 
 // SDF combining operations (k is voided)
 float	op_union(float d1, float d2, float k);
