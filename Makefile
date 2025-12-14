@@ -1,10 +1,14 @@
 NAME = miniRT
 
-CFILES := src/main.c \
+CFILES = src/main.c \
 	src/mat3/mat3mat3.c \
 	src/mat3/mat3vec.c \
 	src/mat3/rot_mat3.c \
 	src/mat3/transp3.c \
+	src/rendering/get_normal.c \
+	src/rendering/point_light.c \
+	src/rendering/raymarch.c \
+	src/rendering/sdf.c \
 	src/shapes/box.c \
 	src/shapes/combining.c \
 	src/shapes/cylinder.c \
@@ -15,9 +19,9 @@ CFILES := src/main.c \
 	src/vec3/add3.c \
 	src/vec3/diff3.c \
 	src/vec3/dot3.c \
-	src/vec3/max3f.c \
 	src/vec3/fmult3.c \
 	src/vec3/length3.c \
+	src/vec3/max3f.c \
 	src/vec3/norm3.c \
 	src/vec3/trans_rot3.c \
 	src/window/init_window.c

@@ -66,10 +66,12 @@ union u_shape
 //
 typedef struct s_shapes
 {
+	short			n_shapes;
 	union u_shape	shapes[MAX_SHAPES];
-	float			(*sdfs[MAX_SHAPES])(float, union u_shape);
+	float			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape);
 	float			(*combine[MAX_SHAPES])(float, float, float);
 	unsigned int	colours[MAX_SHAPES];
+	float			smoothing[MAX_SHAPES];
 }	t_shapes;
 
 // Signed distance functions;
