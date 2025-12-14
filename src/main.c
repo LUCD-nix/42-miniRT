@@ -15,10 +15,8 @@
 #include "rendering/rendering.h"
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
-#include <stddef.h>
-#include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <time.h>
 #include "window/window.h"
 
 static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
@@ -67,6 +65,7 @@ int	main(void)
 	objs.sdfs[1] = &sphere_sdf;
 	objs.combine[1] = &op_substraction;
 
+	clock_t start = clock();
 	for (size_t i = 0; i < SCREEN_Y; i++)
 	{
 		for (size_t j = 0; j < SCREEN_X; j++)
@@ -77,7 +76,9 @@ int	main(void)
 			put_pixel_to_img(&data, j, i, colour);
 		}
 	}
-	printf("finished rendering!\n");
+	clock_t end = clock();
+	double time_elapsed_in_seconds = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("finished rendering in %lf seconds\n", time_elapsed_in_seconds);
 	mlx_put_image_to_window(mlx, window, data.img, 0, 0);
 	mlx_loop(mlx);
 }
