@@ -47,10 +47,10 @@ int	main(void)
 	init_window(&mlx, &window, &data);
 
 	// Cylinder
-	objs.n_shapes = 2;
+	objs.n_shapes = 3;
 	objs.shapes[0] = (union u_shape)(struct s_cylinder){
 		.alignment = rot_mat3(M_PI_2, 0.f, 0.f),
-		.position = (t_vec3) {3.f, 0.f, 0.f},
+		.position = (t_vec3) {3.f, -1.f, 0.f},
 		.radius = 1.f,
 		.height = 5.f
 	};
@@ -58,12 +58,25 @@ int	main(void)
 
 	// neg_sphere
 	objs.shapes[1] = (union u_shape)(struct s_sphere){
-		.position = (t_vec3){3.0f, 1.0f, 0.f},
+		.position = (t_vec3){3.0f, 0.0f, 0.f},
 		.radius = .5f
 	};
 	objs.sdfs[1] = &sphere_sdf;
-	objs.smoothing[1] = 0.5f;
+	objs.smoothing[1] = 0.1f;
 	objs.combine[1] = &op_smooth_substraction;
+
+	// box
+	objs.shapes[2] = (union u_shape)(struct s_box){
+		.rotation = rot_mat3(M_PI_4, M_PI_4, 0.f),
+		.position = (t_vec3) {3.f, 0.5f, 0.f},
+		.lx = 1.f,
+		.ly = 1.f,
+		.lz = 1.f,
+	};
+	objs.sdfs[2] = &box_sdf;
+	objs.smoothing[2] = 0.1f;
+	objs.combine[2] = &op_smooth_union;
+
 
 	clock_t start = clock();
 	for (size_t i = 0; i < SCREEN_Y; i++)
