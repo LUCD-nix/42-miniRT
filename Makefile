@@ -15,6 +15,14 @@ CFILES = src/main.c \
 	src/shapes/plane.c \
 	src/shapes/smooth_combining.c \
 	src/shapes/sphere.c \
+	src/vec2/abs2.c \
+	src/vec2/add2.c \
+	src/vec2/diff2.c \
+	src/vec2/dot2.c \
+	src/vec2/fmult2.c \
+	src/vec2/length2.c \
+	src/vec2/max2f.c \
+	src/vec2/norm2.c \
 	src/vec3/abs3.c \
 	src/vec3/add3.c \
 	src/vec3/diff3.c \
