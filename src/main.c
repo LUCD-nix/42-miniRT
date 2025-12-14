@@ -58,11 +58,12 @@ int	main(void)
 
 	// neg_sphere
 	objs.shapes[1] = (union u_shape)(struct s_sphere){
-		.position = (t_vec3){2.0f, 0.0f, 0.f},
-		.radius = 1.5f
+		.position = (t_vec3){3.0f, 1.0f, 0.f},
+		.radius = .5f
 	};
 	objs.sdfs[1] = &sphere_sdf;
-	objs.combine[1] = &op_substraction;
+	objs.smoothing[1] = 0.5f;
+	objs.combine[1] = &op_smooth_substraction;
 
 	clock_t start = clock();
 	for (size_t i = 0; i < SCREEN_Y; i++)

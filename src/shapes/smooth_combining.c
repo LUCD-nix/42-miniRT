@@ -22,7 +22,7 @@ inline float	op_smooth_union(float d1, float d2, float k)
 
 inline float	op_smooth_substraction(float d1, float d2, float k)
 {
-	return (-op_smooth_union(d1, -d2, k));
+	return (-op_smooth_union(-d1, d2, k));
 }
 
 inline float	op_smooth_intersection(float d1, float d2, float k)
