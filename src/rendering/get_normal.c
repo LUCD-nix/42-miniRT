@@ -21,9 +21,9 @@ inline t_vec3	get_normal(t_vec3 point, t_shapes *objs)
 	// but would require more sdf calls
 	eps = EPS_NORMAL;
 	normal = (t_vec3){
-		sdf(add3(point, (t_vec3){eps, 0, 0}), objs),
-		sdf(add3(point, (t_vec3){0, eps, 0}), objs),
-		sdf(add3(point, (t_vec3){0, 0, eps}), objs),
+		sdf(add3(point, (t_vec3){eps, 0, 0}), objs).dist,
+		sdf(add3(point, (t_vec3){0, eps, 0}), objs).dist,
+		sdf(add3(point, (t_vec3){0, 0, eps}), objs).dist,
 	};
 	return (norm3(normal));
 }

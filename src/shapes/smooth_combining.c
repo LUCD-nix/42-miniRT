@@ -54,7 +54,7 @@ inline t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
 	frac = (1 + (o2.dist - o1.dist) / (o2.dist + o1.dist)) / 2;
 	return ((t_cdist){
 		-smooth_min(-o1.dist, o2.dist, k),
-		rgb_lerp(o1.colour, o2.colour, frac),
+		o1.colour
 	});
 }
 

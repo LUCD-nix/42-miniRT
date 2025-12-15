@@ -55,6 +55,7 @@ int	main(void)
 		.height = 5.f
 	};
 	objs.sdfs[0] = &cylinder_sdf;
+	objs.colours[0] = 0xFF0000;
 
 	// neg_sphere
 	objs.shapes[1] = (union u_shape)(struct s_sphere){
@@ -64,6 +65,7 @@ int	main(void)
 	objs.sdfs[1] = &sphere_sdf;
 	objs.smoothing[1] = 0.1f;
 	objs.combine[1] = &op_smooth_substraction;
+	objs.colours[1] = 0xFFFFFF;
 
 	// box
 	objs.shapes[2] = (union u_shape)(struct s_box){
@@ -76,6 +78,7 @@ int	main(void)
 	objs.sdfs[2] = &box_sdf;
 	objs.smoothing[2] = 0.1f;
 	objs.combine[2] = &op_smooth_union;
+	objs.colours[2] = 0x0000FF;
 
 
 	clock_t start = clock();

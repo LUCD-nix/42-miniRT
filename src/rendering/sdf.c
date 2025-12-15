@@ -11,19 +11,19 @@
 /* ************************************************************************** */
 #include "rendering.h"
 
-inline float	sdf(t_vec3	point, t_shapes *objs)
+inline t_cdist	sdf(t_vec3	point, t_shapes *objs)
 {
 	short	i;
-	float	temp;
-	float	res;
+	t_cdist	temp;
+	t_cdist	res;
 
 	// NOTE : we have to ensure there's always at least a single obj to draw
 	// but doing so here could be too expensive;
-	res = objs->sdfs[0](point, objs->shapes[0]);
+	res = objs->sdfs[0](point, objs->shapes[0], objs->colours[0]);
 	i = 0;
 	while(++i < objs->n_shapes)
 	{
-		temp = objs->sdfs[i](point, objs->shapes[i]);
+		temp = objs->sdfs[i](point, objs->shapes[i], objs->colours[i]);
 		res = objs->combine[i](res, temp, objs->smoothing[i]);
 	}
 	return (res);

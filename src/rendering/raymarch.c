@@ -14,20 +14,22 @@
 
 inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 {
-	float	dS;
-	t_vec3	tmp;
-	t_vec3	normal;
-	size_t	i;
+	t_cdist		colour_dist;
+	t_vec3		tmp;
+	t_vec3		normal;
+	t_colour	obj_colour;
+	size_t		i;
 
-	dS = sdf(origin, objs);
-	tmp = add3(origin, fmult3(direction, dS));
+	colour_dist = sdf(origin, objs);
+	tmp = add3(origin, fmult3(direction, colour_dist.dist));
 	i = -1;
 	while (++i < MAX_STEPS)
 	{
-		dS = sdf(tmp, objs);
-		if (fabsf(dS) < SURFACE_DIST)
+		// TODO : test if += to dS and always marching from orig is better
+		colour_dist = sdf(tmp, objs);
+		if (fabsf(colour_dist.dist) < SURFACE_DIST)
 			break ;
-		tmp = add3(tmp, fmult3(direction, dS));
+		tmp = add3(tmp, fmult3(direction, colour_dist.dist));
 	}
 	// background
 	if (i == MAX_STEPS)
@@ -39,7 +41,11 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 		dot3(normal, (t_vec3){0.f, 1.f, 0.f}),
 		0.0f
 	);
-	unsigned int light = (int)(diffuse * 255);
-	return ((light << 24) + (light << 16)+  (light << 8) + light);
+	obj_colour = *(t_colour *)&colour_dist.colour;
+	obj_colour.a *= diffuse;
+	obj_colour.r *= diffuse;
+	obj_colour.g *= diffuse;
+	obj_colour.b *= diffuse;
+	return (*(unsigned int *)&obj_colour);
 }
 
