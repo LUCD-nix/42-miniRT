@@ -14,9 +14,11 @@ Engine:
     mary if it gets too bad but could take a while to implement
     - [ ] Rewrite parts of rendering to support colours (sdfs/combining should return tuple of distance + colour)
         and so should the combining (lerp if smoothing)
+    - [ ] consider updating lerp to be better;
 
 Done/abandoned: 
 
+    - [x] Added simple colour lerping
     - [w] Install perf to see the hot loops in the code
         - [x] needs bison
         - [x] needs flex
