@@ -56,6 +56,20 @@ union u_shape
 	struct s_plane		plane;
 };
 
+typedef struct s_cdist
+{
+	float			dist;
+	unsigned int	colour;
+}	t_cdist;
+
+typedef struct s_colour
+{
+	unsigned char	r: 8;
+	unsigned char	g: 8;
+	unsigned char	b: 8;
+	unsigned char	a: 8;
+}	t_colour;
+
 // typedef enum e_shape_tag
 // {
 // 	SPHERE,
@@ -68,27 +82,28 @@ typedef struct s_shapes
 {
 	short			n_shapes;
 	union u_shape	shapes[MAX_SHAPES];
-	float			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape);
-	float			(*combine[MAX_SHAPES])(float, float, float);
+	t_cdist			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape,
+		unsigned int colour);
+	t_cdist			(*combine[MAX_SHAPES])(t_cdist, t_cdist, float);
 	unsigned int	colours[MAX_SHAPES];
 	float			smoothing[MAX_SHAPES];
 }	t_shapes;
 
 // Signed distance functions;
 // adapted from : https://iquilezles.org/articles/distfunctions/
-float	sphere_sdf(t_vec3 point, union u_shape ball);
-float	plane_sdf(t_vec3 point, union u_shape surface);
-float	box_sdf(t_vec3 point, union u_shape box);
-float	cylinder_sdf(t_vec3 point, union u_shape cylinder);
+t_cdist	sphere_sdf(t_vec3 point, union u_shape ball, unsigned int colour);
+t_cdist	plane_sdf(t_vec3 point, union u_shape surface, unsigned int colour);
+t_cdist	box_sdf(t_vec3 point, union u_shape box, unsigned int colour);
+t_cdist	cylinder_sdf(t_vec3 point, union u_shape cylinder, unsigned int colour);
 
 // SDF combining operations (k is voided)
-float	op_union(float d1, float d2, float k);
-float	op_substraction(float d1, float d2, float k);
-float	op_intersection(float d1, float d2, float k);
-float	op_xor(float d1, float d2, float k);
+t_cdist	op_union(t_cdist d1, t_cdist d2, float k);
+t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k);
+t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k);
+t_cdist	op_xor(t_cdist d1, t_cdist d2, float k);
 
 // Smooth combining operations(k is the smoothing)
-float	op_smooth_union(float d1, float d2, float k);
-float	op_smooth_substraction(float d1, float d2, float k);
-float	op_smooth_intersection(float d1, float d2, float k);
+t_cdist	op_smooth_union(t_cdist d1, t_cdist d2, float k);
+t_cdist	op_smooth_substraction(t_cdist d1, t_cdist d2, float k);
+t_cdist	op_smooth_intersection(t_cdist d1, t_cdist d2, float k);
 #endif // SHAPES_H

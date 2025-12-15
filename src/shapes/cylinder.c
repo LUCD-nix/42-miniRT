@@ -12,12 +12,13 @@
 #include "shapes.h"
 #include "../vec2/vec2.h"
 
-float	cylinder_sdf(t_vec3 point, union u_shape shape)
+inline t_cdist	cylinder_sdf(t_vec3 point, union u_shape shape,
+							unsigned int colour)
 {
 	t_vec2	d;
 	t_vec3	p;
 
-	// FIXME : 
+	// TODO : 
 	// This is overkill, the cylinder does not need full 3D rotation
 	// consider implementing the arbitrary cylinder by Inigo
 	p = trans_rot3(point, shape.cylinder.position,
@@ -32,5 +33,8 @@ float	cylinder_sdf(t_vec3 point, union u_shape shape)
 		shape.cylinder.radius,
 		shape.cylinder.height / 2
 	});
-	return fminf(fmaxf(d.x,d.y),0.0) + length2(max2f(d,0.0));
+	return ((t_cdist){
+		fminf(fmaxf(d.x,d.y),0.0) + length2(max2f(d,0.0)),
+		colour
+	});
 }

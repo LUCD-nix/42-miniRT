@@ -11,10 +11,13 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float	sphere_sdf(t_vec3 p, union u_shape shape)
+inline t_cdist	sphere_sdf(t_vec3 p, union u_shape shape, unsigned int colour)
 {
 	// NOTE : this is not exactly as in the reference articles, might change
 	// if performance is bad;
 
-	return (length3(diff3(p, shape.sphere.position)) - shape.sphere.radius);
+	return ((t_cdist){
+		length3(diff3(p, shape.sphere.position)) - shape.sphere.radius,
+		colour}
+	);
 }

@@ -11,27 +11,37 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float	op_union(float d1, float d2, float k)
+inline t_cdist	op_union(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
-	return (fminf(d1, d2));
+	// min
+	if (d1.dist < d2.dist)
+		return (d1);
+	return (d2);
 }
 
-inline float	op_substraction(float d1, float d2, float k)
+inline t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
-	// NOTE : test, might want to change which has negative sign later
-	return (fmaxf(d1, -d2));
+	// max (d1, -d2)
+	if (d1.dist > -d2.dist)
+		return (d1);
+	return (d2);
 }
 
-inline float	op_intersection(float d1, float d2, float k)
+inline t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
-	return (fmaxf(d1, d2));
+	// max
+	if (d1.dist > d2.dist)
+		return (d1);
+	return (d2);
 }
 
-inline float	op_xor(float d1, float d2, float k)
+inline t_cdist	op_xor(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
-	return (fmaxf(fminf(d1, d2), -fmaxf(d1, d2)));
+	// return (fmaxf(fminf(d1, d2), -fmaxf(d1, d2)));
+	return (op_substraction(op_union(d1, d2, 0),
+						 op_intersection(d1, d2, 0), 0));
 }

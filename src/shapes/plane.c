@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float plane_sdf(t_vec3 p, union u_shape s)
+inline t_cdist	plane_sdf(t_vec3 p, union u_shape s, unsigned int colour)
 {
-	return (dot3(p, s.plane.normal) - s.plane.height);
+	return ((t_cdist){dot3(p, s.plane.normal) - s.plane.height, colour});
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float	box_sdf(t_vec3 p, union u_shape shape)
+inline t_cdist	box_sdf(t_vec3 p, union u_shape shape, unsigned int colour)
 {
 	t_vec3	q;
 	float	inside;
@@ -25,5 +25,5 @@ inline float	box_sdf(t_vec3 p, union u_shape shape)
 	});
 	outside = length3(max3f(q, 0.0f));
 	inside = fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0f);
-	return (outside + inside);
+	return ((t_cdist){inside + outside, colour});
 }
