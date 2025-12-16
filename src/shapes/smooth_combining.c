@@ -11,18 +11,20 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-static inline unsigned int	rgb_lerp(unsigned int c1, unsigned int c2, float t)
+static inline unsigned int	rgb_lerp(t_cdist o1, t_cdist o2)
 {
 	t_colour	a;
 	t_colour	b;
 	t_colour	res;
+	float	frac;
 
-	a = *(t_colour *)&c1;
-	b = *(t_colour *)&c2;
-	res.a = a.a + (b.a - a.a) * t;
-	res.r = a.r + (b.r - a.r) * t;
-	res.g = a.g + (b.g - a.g) * t;
-	res.b = a.b + (b.b - a.b) * t;
+	frac = (1 + (o1.dist - o2.dist) / (o2.dist + o1.dist)) / 2;
+	a = *(t_colour *)&o1.colour;
+	b = *(t_colour *)&o2.colour;
+	res.a = a.a + (b.a - a.a) * frac;
+	res.r = a.r + (b.r - a.r) * frac;
+	res.g = a.g + (b.g - a.g) * frac;
+	res.b = a.b + (b.b - a.b) * frac;
 	return (*(unsigned int *)&res);
 }
 
@@ -37,12 +39,9 @@ static inline float	smooth_min(float d1, float d2, float k)
 
 inline t_cdist	op_smooth_union(t_cdist o1, t_cdist o2, float k)
 {
-	float	frac;
-
-	frac = (1 + (o2.dist - o1.dist) / (o2.dist + o1.dist)) / 2;
 	return ((t_cdist){
 		smooth_min(o1.dist, o2.dist, k),
-		rgb_lerp(o1.colour, o2.colour, frac),
+		rgb_lerp(o1, o2),
 	});
 }
 
@@ -51,7 +50,7 @@ inline t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
 	// return (-op_smooth_union(-d1, d2, k));
 	float	frac;
 
-	frac = (1 + (o2.dist - o1.dist) / (o2.dist + o1.dist)) / 2;
+	frac = (1 + (o1.dist - o2.dist) / (o2.dist + o1.dist)) / 2;
 	return ((t_cdist){
 		-smooth_min(-o1.dist, o2.dist, k),
 		o1.colour
@@ -63,9 +62,9 @@ inline t_cdist	op_smooth_intersection(t_cdist o1, t_cdist o2, float k)
 	// return (-op_smooth_union(-d1, -d2, k));
 	float	frac;
 
-	frac = (1 + (o2.dist - o1.dist) / (o2.dist + o1.dist)) / 2;
+	frac = (1 + (o1.dist - o2.dist) / (o2.dist + o1.dist)) / 2;
 	return ((t_cdist){
 		-smooth_min(-o1.dist, -o2.dist, k),
-		rgb_lerp(o1.colour, o2.colour, frac),
+		rgb_lerp(o1, o2),
 	});
 }

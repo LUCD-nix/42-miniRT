@@ -56,19 +56,20 @@ union u_shape
 	struct s_plane		plane;
 };
 
+typedef struct s_colour
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}	t_colour;
+
 typedef struct s_cdist
 {
 	float			dist;
 	unsigned int	colour;
 }	t_cdist;
 
-typedef struct s_colour
-{
-	unsigned char	r: 8;
-	unsigned char	g: 8;
-	unsigned char	b: 8;
-	unsigned char	a: 8;
-}	t_colour;
 
 // typedef enum e_shape_tag
 // {
@@ -82,8 +83,7 @@ typedef struct s_shapes
 {
 	short			n_shapes;
 	union u_shape	shapes[MAX_SHAPES];
-	t_cdist			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape,
-		unsigned int colour);
+	float			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape);
 	t_cdist			(*combine[MAX_SHAPES])(t_cdist, t_cdist, float);
 	unsigned int	colours[MAX_SHAPES];
 	float			smoothing[MAX_SHAPES];
@@ -91,10 +91,10 @@ typedef struct s_shapes
 
 // Signed distance functions;
 // adapted from : https://iquilezles.org/articles/distfunctions/
-t_cdist	sphere_sdf(t_vec3 point, union u_shape ball, unsigned int colour);
-t_cdist	plane_sdf(t_vec3 point, union u_shape surface, unsigned int colour);
-t_cdist	box_sdf(t_vec3 point, union u_shape box, unsigned int colour);
-t_cdist	cylinder_sdf(t_vec3 point, union u_shape cylinder, unsigned int colour);
+float	sphere_sdf(t_vec3 point, union u_shape ball);
+float	plane_sdf(t_vec3 point, union u_shape surface);
+float	box_sdf(t_vec3 point, union u_shape box);
+float	cylinder_sdf(t_vec3 point, union u_shape cylinder);
 
 // SDF combining operations (k is voided)
 t_cdist	op_union(t_cdist d1, t_cdist d2, float k);

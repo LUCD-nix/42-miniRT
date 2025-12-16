@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "rendering.h"
+#include <math.h>
 #include <stddef.h>
 
 inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
@@ -25,7 +26,7 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 	i = -1;
 	while (++i < MAX_STEPS)
 	{
-		// TODO : test if += to dS and always marching from orig is better
+		// TODO : test if += to dist and always marching from orig is better
 		colour_dist = sdf(tmp, objs);
 		if (fabsf(colour_dist.dist) < SURFACE_DIST)
 			break ;
@@ -34,11 +35,9 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 	// background
 	if (i == MAX_STEPS)
 		return (0);
-	// printf("sphere:{ %f, %f, %f }\n", tmp.x, tmp.y, tmp.z);
 	normal = get_normal(tmp, objs);
-	// printf("normal:{ %f, %f, %f }\n", normal.x, normal.y, normal.z);
 	float diffuse = fmaxf(
-		dot3(normal, (t_vec3){0.f, 1.f, 0.f}),
+		dot3(normal, (t_vec3){0.0f, M_SQRT1_2, M_SQRT1_2}),
 		0.0f
 	);
 	obj_colour = *(t_colour *)&colour_dist.colour;
@@ -48,4 +47,3 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 	obj_colour.b *= diffuse;
 	return (*(unsigned int *)&obj_colour);
 }
-
