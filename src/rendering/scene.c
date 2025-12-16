@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdf.c                                              :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:48:26 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/12 17:48:27 by lucorrei         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:26:36 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "rendering.h"
 
-inline t_cdist	sdf(t_vec3	point, t_shapes *objs)
+inline t_cdist	scene(t_vec3	point, t_shapes *objs)
 {
 	short	i;
 	t_cdist	temp;

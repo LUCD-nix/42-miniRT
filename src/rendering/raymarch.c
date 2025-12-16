@@ -21,13 +21,13 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 	t_colour	obj_colour;
 	size_t		i;
 
-	colour_dist = sdf(origin, objs);
+	colour_dist = scene(origin, objs);
 	tmp = add3(origin, fmult3(direction, colour_dist.dist));
 	i = -1;
 	while (++i < MAX_STEPS)
 	{
 		// TODO : test if += to dist and always marching from orig is better
-		colour_dist = sdf(tmp, objs);
+		colour_dist = scene(tmp, objs);
 		if (fabsf(colour_dist.dist) < SURFACE_DIST)
 			break ;
 		tmp = add3(tmp, fmult3(direction, colour_dist.dist));

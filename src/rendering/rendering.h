@@ -18,7 +18,7 @@
 #define SURFACE_DIST 0.00001f
 #define EPS_NORMAL 0.001f
 
-t_cdist				sdf(t_vec3 point, t_shapes *objs);
+t_cdist				scene(t_vec3 point, t_shapes *objs);
 t_vec3				get_normal(t_vec3 point, t_shapes *objs);
 unsigned int		raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs);
 
