@@ -6,49 +6,81 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:33:11 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 17:35:54 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/12/17 22:44:46 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	parse_scene(const char *filename)
+static t_scene	*init_scene(void)
 {
-	int		fd;
-	char	*line;
-	int		line_num;
 	t_scene	*scene;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (0);
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
+		return (NULL);
+	ft_memset(scene, 0, sizeof(t_scene));
+	return (scene);
+}
+
+static int	dispatch_line(char *line, t_scene *scene, int line_num)
+{
+	if (line[0] == 'A' && line[1] == ' ')
+		return (parse_ambient(line, scene, line_num));
+	else if (line[0] == 'C' && line[1] == ' ')
+		return (parse_camera(line, scene, line_num));
+	else if (line[0] == 'L' && line[1] == ' ')
+		return (parse_light(line, scene, line_num));
+	else if (line[0] == 's' && line[1] == 'p' && line[2] == ' ')
+		return (parse_sphere(line, scene, line_num));
+	else
+		return (printf("Error\nLine %d: Unknown identifier\n", line_num), 0);
+}
+
+static int	validate_scene(t_scene *scene)
+{
+	if (!scene->has_ambient)
+		return (printf("Error\nMissing ambient light (A)\n"), 0);
+	if (!scene->has_camera)
+		return (printf("Error\nMissing camera (C)\n"), 0);
+	if (!scene->has_light)
+		return (printf("Error\nMissing light (L)\n"), 0);
+	return (1);
+}
+
+static int	parse_lines(int fd, t_scene *scene)
+{
+	char	*line;
+	int		line_num;
+
 	line_num = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		line_num++;
-		if (line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
-		if (line[0] == 'A')
-			parse_ambient_light(line, scene, line_num);
-		else if (line[0] == 'C')
-			parse_camera(line, scene, line_num);
-		else if (line[0] == 'L')
-			parse_light(line, scene, line_num);
-		else
-		{
-			printf("Error\nLine %d: Unknown identifier\n", line_num);
-			free(line);
-			close(fd);
-			return (0);
-		}
+		if (line[0] != '\n' && !dispatch_line(line, scene, line_num))
+			return (free(line), 0);
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
 	return (1);
+}
+
+t_scene	*parse_scene(const char *filename)
+{
+	int		fd;
+	t_scene	*scene;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (printf("Error\nCannot open file: %s\n", filename), NULL);
+	scene = init_scene();
+	if (!scene)
+		return (close(fd), NULL);
+	if (!parse_lines(fd, scene))
+		return (close(fd), free(scene), NULL);
+	close(fd);
+	if (!validate_scene(scene))
+		return (free(scene), NULL);
+	return (scene);
 }
