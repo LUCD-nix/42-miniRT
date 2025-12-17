@@ -4,6 +4,7 @@ CFILES = src/main.c \
 	src/mat3/mat3mat3.c \
 	src/mat3/mat3vec.c \
 	src/mat3/rot_mat3.c \
+	src/mat3/rot_mat3_int.c \
 	src/mat3/transp3.c \
 	src/rendering/get_normal.c \
 	src/rendering/point_light.c \

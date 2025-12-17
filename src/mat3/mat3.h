@@ -33,6 +33,7 @@ t_mat3	mat3mat3(t_mat3 a, t_mat3 b);
 t_vec3	mat3vec(t_mat3 a, t_vec3 v);
 t_mat3	transp3(t_mat3 m);
 t_mat3	rot_mat3(float rx, float ry, float rz);
+t_mat3	rot_mat3_int(float a, float b, float g);
 
 #endif // MATH3_H
 
