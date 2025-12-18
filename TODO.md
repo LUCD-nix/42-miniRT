@@ -3,11 +3,7 @@ Engine:
     - [ ] Consider using the analytical gradients for shading normals
     https://iquilezles.org/articles/distgradfunctions3d/
     (sphere & cylinder available);
-    - [ ] Make SDFs always use origin
-        - [x] implies implementing a way to translate and rotate space
-        which would have to be used at sdf call site
-            - might need determinant soon.
-        - would make translating Inigo's code easier
+    - [x] Implement a camera struct and make get_uv use it;
     - [ ] Start work on smooth shading, using raymarching
         - https://iquilezles.org/articles/rmshadows/
     - [ ] Inigo has intersection functions, could be a performance hail
@@ -18,6 +14,10 @@ Engine:
 
 Done/abandoned: 
 
+    - [x] Make SDFs always use origin
+        - [x] implies implementing a way to translate and rotate space
+        which would have to be used at sdf call site
+            - might need determinant soon.
     - [x] Added simple colour lerping
     - [w] Install perf to see the hot loops in the code
         - [x] needs bison

@@ -6,10 +6,12 @@ CFILES = src/main.c \
 	src/mat3/rot_mat3.c \
 	src/mat3/rot_mat3_int.c \
 	src/mat3/transp3.c \
+	src/rendering/camera_setup.c \
 	src/rendering/get_normal.c \
+	src/rendering/get_uv.c \
 	src/rendering/point_light.c \
 	src/rendering/raymarch.c \
-	src/rendering/sdf.c \
+	src/rendering/scene.c \
 	src/shapes/box.c \
 	src/shapes/combining.c \
 	src/shapes/cylinder.c \

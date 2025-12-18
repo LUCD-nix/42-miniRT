@@ -28,14 +28,6 @@ static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static inline t_vec3	get_uv(size_t px, size_t py)
-{
-	// FIXME : very simple impl, will need to change for setting view dir etc
-	float	u = ((float) px / SCREEN_X - 0.5)  * (16.f / 9.f);
-	float	v = (float) py / SCREEN_Y - 0.5;
-	return (norm3((t_vec3){1, -v, u}));
-}
-
 int	main(void)
 {
 	void			*mlx;
@@ -80,15 +72,23 @@ int	main(void)
 	objs.combine[2] = &op_smooth_union;
 	objs.colours[2] = 0xFF00FFFF;
 
+#define MRT_SQRT1_3 0.57735026919f
 
+	t_camera cam = camera_setup((t_vec3){-1.f, 1.f, 1.f },
+							 norm3((t_vec3){4, -1.f, -1.f}),
+							 M_PI_2);
+	printf("pointer to center of screen : { %f, %f, %f }\n", cam.screen_plane.x, cam.screen_plane.y, cam.screen_plane.z);
+	printf("normalized u_dir: { %f, %f, %f }\n", cam.u_3.x, cam.u_3.y, cam.u_3.z);
+	printf("normalized v_dir: { %f, %f, %f }\n", cam.v_3.x, cam.v_3.y, cam.v_3.z);
 	clock_t start = clock();
 	for (size_t i = 0; i < SCREEN_Y; i++)
 	{
 		for (size_t j = 0; j < SCREEN_X; j++)
 		{
-			t_vec3 rd = get_uv(j, i);
+			t_vec3 rd = get_uv(j, i, cam);
+			// printf("looking at : { %f, %f, %f }\n", rd.x, rd.y, rd.z);
 			unsigned int colour =
-				raymarch((t_vec3){0.0f, 0.0f, 0.0f}, rd, &objs);
+				raymarch(cam.camera_pos, rd, &objs);
 			put_pixel_to_img(&data, j, i, colour);
 		}
 	}

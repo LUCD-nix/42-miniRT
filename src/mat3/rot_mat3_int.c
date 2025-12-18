@@ -14,7 +14,7 @@
 // This is the same as rot_mat3 but we're using intrinsic rotation
 // https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
 
-inline t_mat3 rot_mat3(float a, float b, float g)
+inline t_mat3 rot_mat3_int(float a, float b, float g)
 {
 	t_mat3	rot_x;
 	t_mat3	rot_y;
