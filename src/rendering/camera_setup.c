@@ -14,14 +14,8 @@
 
 static void	find_pitch_yaw(t_vec3 view_dir, float *pitch, float *yaw)
 {
-	t_vec3	temp;
-
-	temp = view_dir;
-	temp.z = 0;
-	*pitch = acosf(dot3(norm3(temp), (t_vec3){1.f, 0.f, 0.f}));
-	temp = view_dir;
-	temp.y = 0;
-	*yaw = acosf(dot3(norm3(temp), (t_vec3){1.f, 0.f, 0.f}));
+	*yaw = atan2f(-view_dir.z, view_dir.x);
+	*pitch = asinf(view_dir.y);
 }
 
 t_camera	camera_setup(t_vec3 position, t_vec3 view_dir,
