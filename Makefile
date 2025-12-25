@@ -60,7 +60,7 @@ all: ${NAME}
 ${NAME}:  ${OBJS} ${LIBFT} ${MLIBX}
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${LFLAGS} -o ${NAME}
 
-%.o: %.c minishell.h
+%.o: %.c
 	${CC} -c ${CFLAGS} $< -o $@
 
 ${LIBFT}:

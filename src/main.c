@@ -19,13 +19,15 @@
 #include <time.h>
 #include "window/window.h"
 
-static inline void	put_pixel_to_img(t_img *data, int x, int y, int color)
+static inline void	put_pixel_to_img(t_img *data, int x, int y, t_colour colour)
 {
 	// TODO : consider manual inlining
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	*(unsigned int *)dst = ((unsigned int)colour.r << 16)
+		+  ((unsigned int)colour.g << 8)
+		+ (unsigned int)colour.b;
 }
 
 int	main(void)
@@ -34,7 +36,7 @@ int	main(void)
 	void			*window;
 	t_img			data;
 	static t_shapes	objs;
-	
+
 	// Init window exits in case of problem
 	init_window(&mlx, &window, &data);
 
@@ -47,7 +49,7 @@ int	main(void)
 		.height = 5.f
 	};
 	objs.sdfs[0] = &cylinder_sdf;
-	objs.colours[0] = 0xFF00FF;
+	objs.colours[0] = (t_colour){0, 0xff, 0xff, 0xff};
 
 	// neg_sphere
 	objs.shapes[1] = (union u_shape)(struct s_sphere){
@@ -57,7 +59,7 @@ int	main(void)
 	objs.sdfs[1] = &sphere_sdf;
 	objs.smoothing[1] = 0.1f;
 	objs.combine[1] = &op_smooth_substraction;
-	objs.colours[1] = 0xFFFFFFFF;
+	objs.colours[1] = (t_colour){0xff, 0x00, 0xff, 0};
 
 	// box
 	objs.shapes[2] = (union u_shape)(struct s_box){
@@ -70,26 +72,26 @@ int	main(void)
 	objs.sdfs[2] = &box_sdf;
 	objs.smoothing[2] = 0.1f;
 	objs.combine[2] = &op_smooth_union;
-	objs.colours[2] = 0xFF00FFFF;
-
+	objs.colours[2] = (t_colour){0, 0xff, 0x0, 0xff};
 #define MRT_SQRT1_3 0.57735026919f
 
 	t_camera cam = camera_setup((t_vec3){-1.f, 1.f, 1.f },
 							 norm3((t_vec3){4, -1.f, -1.f}),
 							 M_PI_2);
-	printf("pointer to center of screen : { %f, %f, %f }\n", cam.screen_plane.x, cam.screen_plane.y, cam.screen_plane.z);
-	printf("normalized u_dir: { %f, %f, %f }\n", cam.u_3.x, cam.u_3.y, cam.u_3.z);
-	printf("normalized v_dir: { %f, %f, %f }\n", cam.v_3.x, cam.v_3.y, cam.v_3.z);
+	printf("pointer to center of screen : { %f, %f, %f }\n",
+		cam.screen_plane.x, cam.screen_plane.y, cam.screen_plane.z);
+	printf("normalized u_dir: { %f, %f, %f }\n", cam.u_3.x, cam.u_3.y,
+		cam.u_3.z);
+	printf("normalized v_dir: { %f, %f, %f }\n", cam.v_3.x, cam.v_3.y,
+		cam.v_3.z);
 	clock_t start = clock();
 	for (size_t i = 0; i < SCREEN_Y; i++)
 	{
 		for (size_t j = 0; j < SCREEN_X; j++)
 		{
 			t_vec3 rd = get_uv(j, i, cam);
-			// printf("looking at : { %f, %f, %f }\n", rd.x, rd.y, rd.z);
-			unsigned int colour =
-				raymarch(cam.camera_pos, rd, &objs);
-			put_pixel_to_img(&data, j, i, colour);
+			t_colour temp = raymarch(cam.camera_pos, rd, &objs);
+			put_pixel_to_img(&data, j, i, temp);
 		}
 	}
 	clock_t end = clock();

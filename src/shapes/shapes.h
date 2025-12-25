@@ -56,18 +56,11 @@ union u_shape
 	struct s_plane		plane;
 };
 
-typedef struct s_colour
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-}	t_colour;
 
 typedef struct s_cdist
 {
-	float			dist;
-	unsigned int	colour;
+	float		dist;
+	t_colour	colour;
 }	t_cdist;
 
 
@@ -85,7 +78,7 @@ typedef struct s_shapes
 	union u_shape	shapes[MAX_SHAPES];
 	float			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape);
 	t_cdist			(*combine[MAX_SHAPES])(t_cdist, t_cdist, float);
-	unsigned int	colours[MAX_SHAPES];
+	t_colour		colours[MAX_SHAPES];
 	float			smoothing[MAX_SHAPES];
 }	t_shapes;
 

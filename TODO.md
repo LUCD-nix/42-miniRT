@@ -12,18 +12,18 @@ Engine:
         and so should the combining (lerp if smoothing)
     - [ ] consider updating lerp to be better;
 
-Done/abandoned: 
+Done/abandoned:
 
+    - [x] GET THIS GODDAMN THING TO COMPILE
+    - [x] i don't thing it's the libraries but do check (go to file) if we have libext
+    - [x] im almost certain it's the std=gnu99 that's messing it up but doing that fixes the
+    other compiler error so idk man
     - [x] Make SDFs always use origin
         - [x] implies implementing a way to translate and rotate space
         which would have to be used at sdf call site
             - might need determinant soon.
     - [x] Added simple colour lerping
-    - [w] Install perf to see the hot loops in the code
-        - [x] needs bison
-        - [x] needs flex
-        - [ ] needs a bunch of libraries i am a bit lazy to fetch
-            - [ ] also needs them in INCLUDES at runtime
+    - [x] Install perf to see the hot loops in the code
     - [x] refactor drawing funcs in their own module;
     - [x] Start work on sdf call structure
         - [x] So the choice is a static array of structs or a static structure

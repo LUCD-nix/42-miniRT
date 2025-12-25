@@ -15,4 +15,3 @@ inline t_vec2	abs2(t_vec2 v)
 {
 	return ((t_vec2){.x = fabsf(v.x), .y = fabsf(v.y)});
 }
-

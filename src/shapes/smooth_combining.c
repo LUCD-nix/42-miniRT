@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-static inline unsigned int	rgb_lerp(t_cdist o1, t_cdist o2)
+t_colour	rgb_lerp(t_cdist o1, t_cdist o2)
 {
 	t_colour	a;
 	t_colour	b;
@@ -19,13 +19,13 @@ static inline unsigned int	rgb_lerp(t_cdist o1, t_cdist o2)
 	float	frac;
 
 	frac = (1 + (o1.dist - o2.dist) / (o2.dist + o1.dist)) / 2;
-	a = *(t_colour *)&o1.colour;
-	b = *(t_colour *)&o2.colour;
+	a = o1.colour;
+	b = o2.colour;
 	res.a = a.a + (b.a - a.a) * frac;
 	res.r = a.r + (b.r - a.r) * frac;
 	res.g = a.g + (b.g - a.g) * frac;
 	res.b = a.b + (b.b - a.b) * frac;
-	return (*(unsigned int *)&res);
+	return (res);
 }
 
 static inline float	smooth_min(float d1, float d2, float k)

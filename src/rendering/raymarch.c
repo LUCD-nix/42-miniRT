@@ -13,12 +13,12 @@
 #include <math.h>
 #include <stddef.h>
 
-inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
+inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 {
 	t_cdist		colour_dist;
 	t_vec3		tmp;
 	t_vec3		normal;
-	t_colour	obj_colour;
+	t_colour	res_colour;
 	size_t		i;
 
 	colour_dist = scene(origin, objs);
@@ -34,7 +34,7 @@ inline unsigned int	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 	}
 	// background
 	if (i == MAX_STEPS)
-		return (0);
+		return ((t_colour){0, 0, 0});
 	normal = get_normal(tmp, objs);
 	float diffuse = fmaxf(
 		dot3(normal, (t_vec3){0.0f, M_SQRT1_2, M_SQRT1_2}),
