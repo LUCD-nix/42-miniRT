@@ -16,10 +16,10 @@
 #include <stdlib.h>
 // #define SCREEN_X 1920
 // #define SCREEN_Y 1080
-// #define SCREEN_X 854
-// #define SCREEN_Y 480
-#define SCREEN_X 160
-#define SCREEN_Y 90
+#define SCREEN_X 854
+#define SCREEN_Y 480
+// #define SCREEN_X 160
+// #define SCREEN_Y 90
 
 typedef struct s_img
 {

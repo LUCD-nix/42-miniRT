@@ -1,13 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point_light.c                                      :+:      :+:    :+:   */
+/*   add_light_to_obj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 17:33:37 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/12 17:33:37 by lucorrei         ###   ########.fr       */
+/*   Created: 2025/12/04 16:51:17 by lucorrei          #+#    #+#             */
+/*   Updated: 2025/12/04 16:51:20 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "lighting.h"
+#include <stdio.h>
 
+inline t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
+{
+	t_colour	res;
 
+	res.a = obj.a * (intensity * light.a / 255.f);
+	res.r = obj.r * (intensity * light.r / 255.f);
+	res.g = obj.g * (intensity * light.g / 255.f);
+	res.b = obj.b * (intensity * light.b / 255.f);
+	return (res);
+}

@@ -9,12 +9,13 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <math.h>
+#include "lighting/lighting.h"
 #include "vec3/vec3.h"
 #include "mat3/mat3.h"
 #include "shapes/shapes.h"
 #include "rendering/rendering.h"
 #include "../minilibx-linux/mlx.h"
-#include <math.h>
 #include <stdio.h>
 #include <time.h>
 #include "window/window.h"
@@ -40,8 +41,19 @@ int	main(void)
 	// Init window exits in case of problem
 	init_window(&mlx, &window, &data);
 
+	objs.point = (t_point_light){
+		.position = (t_vec3) {4.f, 4.f, 4.f},
+		.radius = 10.f,
+		.intensity = 0.5f,
+		.colour = {0xFF, 0xFF, 0xFF, 0xFF}
+	};
+	objs.ambient = (t_ambient_light){
+		.direction = (t_vec3) {0.f, -M_SQRT1_2, -M_SQRT1_2},
+		.colour = (t_colour){0xFF, 0x8F, 0x0, 0xFF},
+		.intensity = 0.5f
+	};
+	objs.n_shapes = 4;
 	// Cylinder
-	objs.n_shapes = 3;
 	objs.shapes[0] = (union u_shape)(struct s_cylinder){
 		.alignment = rot_mat3(M_PI_2, 0.f, 0.f),
 		.position = (t_vec3) {3.f, -1.f, 0.f},
@@ -49,7 +61,7 @@ int	main(void)
 		.height = 5.f
 	};
 	objs.sdfs[0] = &cylinder_sdf;
-	objs.colours[0] = (t_colour){0, 0xff, 0xff, 0xff};
+	objs.colours[0] = (t_colour){0, 0xee, 0xee, 0xee};
 
 	// neg_sphere
 	objs.shapes[1] = (union u_shape)(struct s_sphere){
@@ -73,6 +85,16 @@ int	main(void)
 	objs.smoothing[2] = 0.1f;
 	objs.combine[2] = &op_smooth_union;
 	objs.colours[2] = (t_colour){0, 0xff, 0x0, 0xff};
+
+	//Plane
+	objs.shapes[3] = (union u_shape)(struct s_plane){
+		.height = -1.f,
+		.normal = (t_vec3){0.f, 1.f, 0.f}
+	};
+	objs.sdfs[3] = &plane_sdf;
+	objs.combine[3] = &op_union;
+	objs.colours[3] = (t_colour){0, 0, 77, 64};
+
 #define MRT_SQRT1_3 0.57735026919f
 
 	t_camera cam = camera_setup((t_vec3){-1.f, 1.f, 1.f },
