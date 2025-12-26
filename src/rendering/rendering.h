@@ -15,7 +15,7 @@
 # include "../mat3/mat3.h"
 # include "../shapes/shapes.h"
 # include "../window/window.h"
-#define MAX_STEPS 100
+# include "../lighting/lighting.h"
 # define MAX_STEPS 100
 # define SURFACE_DIST 0.00001f
 # define EPS_NORMAL 0.001f
@@ -38,5 +38,6 @@ t_vec3		get_uv(size_t px, size_t py, t_camera screen);
 t_vec3		get_normal(t_vec3 point, t_shapes *objs);
 t_camera	camera_setup(t_vec3 position, t_vec3 view_dir, float h_fov);
 t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs);
+float	soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point);
 
 #endif // RENDERING_H

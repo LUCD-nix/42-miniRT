@@ -16,34 +16,41 @@
 inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 {
 	t_cdist		colour_dist;
-	t_vec3		tmp;
+	t_vec3		ray;
 	t_vec3		normal;
 	t_colour	res_colour;
 	size_t		i;
+	float		walk;
 
-	colour_dist = scene(origin, objs);
-	tmp = add3(origin, fmult3(direction, colour_dist.dist));
 	i = -1;
+	colour_dist = scene(origin, objs);
+	walk = colour_dist.dist;
 	while (++i < MAX_STEPS)
 	{
-		// TODO : test if += to dist and always marching from orig is better
-		colour_dist = scene(tmp, objs);
+		ray = add3(origin, fmult3(direction, walk));
+		colour_dist = scene(ray, objs);
+		walk += colour_dist.dist;
 		if (fabsf(colour_dist.dist) < SURFACE_DIST)
 			break ;
-		tmp = add3(tmp, fmult3(direction, colour_dist.dist));
 	}
 	// background
 	if (i == MAX_STEPS)
-		return ((t_colour){0, 0, 0});
-	normal = get_normal(tmp, objs);
+		return ((t_colour){0, 0, 0, 0});
+	normal = get_normal(ray, objs);
 	float diffuse = fmaxf(
-		dot3(normal, (t_vec3){0.0f, M_SQRT1_2, M_SQRT1_2}),
+		dot3(normal, fmult3(objs->ambient.direction, -1.f)),
 		0.0f
 	);
-	obj_colour = *(t_colour *)&colour_dist.colour;
-	obj_colour.a *= diffuse;
-	obj_colour.r *= diffuse;
-	obj_colour.g *= diffuse;
-	obj_colour.b *= diffuse;
-	return (*(unsigned int *)&obj_colour);
+	res_colour = add_light_to_obj(colour_dist.colour,
+		objs->ambient.colour, diffuse * objs->ambient.intensity);
+	float soft_shadows = soft_shadow(objs->point, objs, ray);
+	t_colour point_colour = add_light_to_obj(colour_dist.colour,
+		objs->point.colour, soft_shadows * objs->point.intensity);
+	res_colour = (t_colour) {
+		res_colour.a + point_colour.a,
+		res_colour.r + point_colour.r,
+		res_colour.g + point_colour.g,
+		res_colour.b + point_colour.b,
+	};
+	return (res_colour);
 }

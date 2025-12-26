@@ -1,6 +1,7 @@
 NAME = miniRT
 
 CFILES = src/main.c \
+	src/lighting/add_light_to_obj.c \
 	src/mat3/mat3mat3.c \
 	src/mat3/mat3vec.c \
 	src/mat3/rot_mat3.c \
@@ -9,9 +10,9 @@ CFILES = src/main.c \
 	src/rendering/camera_setup.c \
 	src/rendering/get_normal.c \
 	src/rendering/get_uv.c \
-	src/rendering/point_light.c \
 	src/rendering/raymarch.c \
 	src/rendering/scene.c \
+	src/rendering/soft_shadow.c \
 	src/shapes/box.c \
 	src/shapes/combining.c \
 	src/shapes/cylinder.c \
@@ -47,7 +48,7 @@ MLIBXDIR = minilibx-linux/
 LIBFT := ${LIBFTDIR}libft.a
 MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
-CFLAGS = -Wall -Wextra -Werror -O3 -ggdb3 \
+CFLAGS = -std=gnu99 -O3 \
 	-ffast-math \
 	-funsafe-math-optimizations \
 	-fno-math-errno \

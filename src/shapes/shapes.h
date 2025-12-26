@@ -14,6 +14,7 @@
 # define SHAPES_H
 # include "../vec3/vec3.h"
 # include "../mat3/mat3.h"
+# include "../lighting/lighting.h"
 
 # ifndef MAX_SHAPES
 #  define MAX_SHAPES 10
@@ -75,6 +76,8 @@ typedef struct s_cdist
 typedef struct s_shapes
 {
 	short			n_shapes;
+	t_ambient_light	ambient;
+	t_point_light	point;
 	union u_shape	shapes[MAX_SHAPES];
 	float			(*sdfs[MAX_SHAPES])(t_vec3, union u_shape);
 	t_cdist			(*combine[MAX_SHAPES])(t_cdist, t_cdist, float);
