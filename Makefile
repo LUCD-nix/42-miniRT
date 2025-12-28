@@ -9,6 +9,7 @@ CFILES = src/main.c \
 	src/mat3/transp3.c \
 	src/rendering/apply_lights.c \
 	src/rendering/camera_setup.c \
+	src/rendering/full_render.c \
 	src/rendering/get_normal.c \
 	src/rendering/get_uv.c \
 	src/rendering/raymarch.c \
@@ -59,6 +60,9 @@ LFLAGS := -I${LIBFTDIR} -I${MLIBXDIR} -lXext -lX11 -lm
 
 all: ${NAME}
 
+run : ${NAME}
+	./${NAME}
+
 ${NAME}:  ${OBJS} ${LIBFT} ${MLIBX}
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${LFLAGS} -o ${NAME}
 
@@ -82,4 +86,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: fclean clean all re bonus
+.PHONY: fclean clean all re bonus run

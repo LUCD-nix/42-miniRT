@@ -34,6 +34,7 @@ typedef struct s_camera
 
 
 
+void		full_render(t_shapes objs, t_camera cam, t_img *data);
 t_cdist		scene(t_vec3 point, t_shapes *objs);
 t_colour	apply_lights(t_shapes *objs, t_vec3 ray, t_cdist colour_dist);
 t_vec3		get_uv(size_t px, size_t py, t_camera screen);

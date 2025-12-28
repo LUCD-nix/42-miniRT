@@ -107,15 +107,7 @@ int	main(void)
 	printf("normalized v_dir: { %f, %f, %f }\n", cam.v_3.x, cam.v_3.y,
 		cam.v_3.z);
 	clock_t start = clock();
-	for (size_t i = 0; i < SCREEN_Y; i++)
-	{
-		for (size_t j = 0; j < SCREEN_X; j++)
-		{
-			t_vec3 rd = get_uv(j, i, cam);
-			t_colour temp = raymarch(cam.camera_pos, rd, &objs);
-			put_pixel_to_img(&data, j, i, temp);
-		}
-	}
+	full_render(objs, cam, &data);
 	clock_t end = clock();
 	double render_time_s = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("finished rendering in %lf seconds\n", render_time_s);
