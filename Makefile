@@ -7,6 +7,7 @@ CFILES = src/main.c \
 	src/mat3/rot_mat3.c \
 	src/mat3/rot_mat3_int.c \
 	src/mat3/transp3.c \
+	src/rendering/apply_lights.c \
 	src/rendering/camera_setup.c \
 	src/rendering/get_normal.c \
 	src/rendering/get_uv.c \
