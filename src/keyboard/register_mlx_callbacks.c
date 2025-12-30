@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fast_render.c                                      :+:      :+:    :+:   */
+/*   register_mlx_callbacks.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,44 +9,11 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "rendering.h"
+#include "keyboard.h"
 
-static void	big_pixel(t_colour colour, size_t px, size_t py, t_img *data)
+void	register_mlx_callbacks(void *mlx_window, t_scene *scene)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			put_pixel_to_img(data, py + j, px + i, colour);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
-{
-	int			i;
-	int			j;
-	t_vec3		rd;
-	t_colour	temp;
-
-	i = 0;
-	while (i < SCREEN_Y - 10)
-	{
-		j = 0;
-		while (j < SCREEN_X - 10)
-		{
-			rd = get_uv(j + 5, i + 5, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
-			big_pixel(temp, i, j, data);
-			j += 10;
-		}
-		i += 10;
-	}
+	mlx_key_hook(mlx_window, &keyboard_dispatch, scene);
+	mlx_hook(mlx_window, 17, STRUCTURE_NOTIFY_MASK,
+		&free_mlx_and_exit, scene);
 }

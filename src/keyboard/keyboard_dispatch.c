@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fast_render.c                                      :+:      :+:    :+:   */
+/*   keyboard_dispatch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,44 +9,27 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "rendering.h"
+#include "keyboard.h"
 
-static void	big_pixel(t_colour colour, size_t px, size_t py, t_img *data)
+int		keyboard_dispatch(int keycode, void *param)
 {
-	int	i;
-	int	j;
+	t_scene	*scene;
 
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			put_pixel_to_img(data, py + j, px + i, colour);
-			j++;
-		}
-		i++;
-	}
+	scene = (t_scene *) param;
+	if (keycode == KB_ESCAPE)
+		free_mlx_and_exit(scene);
+	else if (keycode >= KB_LEFT && keycode <= KB_DOWN)
+		look_around_arrows(keycode, scene);
+	else if (keycode == KB_W
+			|| keycode == KB_A
+			|| keycode == KB_S
+			|| keycode == KB_D
+			|| keycode == KB_LEFT_CTRL
+			|| keycode == KB_LEFT_SHIFT)
+		move_around_wasd(keycode, scene);
+	fast_render(scene->objs, *scene->cam, scene->img);
+	mlx_put_image_to_window(scene->mlx, scene->mlx_window,
+		scene->img->img, 0, 0);
+	return (0);
 }
 
-void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
-{
-	int			i;
-	int			j;
-	t_vec3		rd;
-	t_colour	temp;
-
-	i = 0;
-	while (i < SCREEN_Y - 10)
-	{
-		j = 0;
-		while (j < SCREEN_X - 10)
-		{
-			rd = get_uv(j + 5, i + 5, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
-			big_pixel(temp, i, j, data);
-			j += 10;
-		}
-		i += 10;
-	}
-}

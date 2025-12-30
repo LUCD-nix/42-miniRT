@@ -34,6 +34,7 @@ typedef struct s_camera
 
 
 
+void		put_pixel_to_img(t_img *data, int x, int y, t_colour colour);
 void		fast_render(t_shapes *objs, t_camera cam, t_img *data);
 void		full_render(t_shapes *objs, t_camera cam, t_img *data);
 t_cdist		scene(t_vec3 point, t_shapes *objs);

@@ -19,8 +19,9 @@
 #include <stdio.h>
 #include <time.h>
 #include "window/window.h"
+#include "keyboard/keyboard.h"
 
-static inline void	put_pixel_to_img(t_img *data, int x, int y, t_colour colour)
+void	put_pixel_to_img(t_img *data, int x, int y, t_colour colour)
 {
 	// TODO : consider manual inlining
 	char	*dst;
@@ -106,8 +107,16 @@ int	main(void)
 		cam.u_3.z);
 	printf("normalized v_dir: { %f, %f, %f }\n", cam.v_3.x, cam.v_3.y,
 		cam.v_3.z);
+	t_scene	scene = (t_scene){
+		.objs = &objs,
+		.cam = &cam,
+		.mlx = mlx,
+		.mlx_window = window,
+		.img = &data
+	};
+	register_mlx_callbacks(window, &scene);
 	clock_t start = clock();
-	full_render(objs, cam, &data);
+	full_render(&objs, cam, &data);
 	clock_t end = clock();
 	double render_time_s = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("finished rendering in %lf seconds\n", render_time_s);

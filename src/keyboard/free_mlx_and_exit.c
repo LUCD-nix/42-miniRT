@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fast_render.c                                      :+:      :+:    :+:   */
+/*   free_mlx_and_exit.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,44 +9,19 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "rendering.h"
+#include "keyboard.h"
 
-static void	big_pixel(t_colour colour, size_t px, size_t py, t_img *data)
+int	free_mlx_and_exit(t_scene *scene)
 {
-	int	i;
-	int	j;
+	void	*mlx;
+	t_img	*image_data;
 
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			put_pixel_to_img(data, py + j, px + i, colour);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
-{
-	int			i;
-	int			j;
-	t_vec3		rd;
-	t_colour	temp;
-
-	i = 0;
-	while (i < SCREEN_Y - 10)
-	{
-		j = 0;
-		while (j < SCREEN_X - 10)
-		{
-			rd = get_uv(j + 5, i + 5, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
-			big_pixel(temp, i, j, data);
-			j += 10;
-		}
-		i += 10;
-	}
+	image_data = scene->img;
+	mlx = scene->mlx;
+	mlx_destroy_image(mlx, image_data->img);
+	mlx_destroy_window(mlx, scene->mlx_window);
+	mlx_destroy_display(mlx);
+	free(mlx);
+	exit(EXIT_SUCCESS);
+	return (0);
 }

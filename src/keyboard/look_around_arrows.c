@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fast_render.c                                      :+:      :+:    :+:   */
+/*   look_around_arrows.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,44 +9,31 @@
 /*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "rendering.h"
+#include "keyboard.h"
 
-static void	big_pixel(t_colour colour, size_t px, size_t py, t_img *data)
+void	look_around_arrows(int keycode, t_scene *scene)
 {
-	int	i;
-	int	j;
+	t_camera	*cam;
+	t_mat3		to_rotate;
+	t_mat3		rotated;
+	float		focus_dist;
 
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			put_pixel_to_img(data, py + j, px + i, colour);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
-{
-	int			i;
-	int			j;
-	t_vec3		rd;
-	t_colour	temp;
-
-	i = 0;
-	while (i < SCREEN_Y - 10)
-	{
-		j = 0;
-		while (j < SCREEN_X - 10)
-		{
-			rd = get_uv(j + 5, i + 5, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
-			big_pixel(temp, i, j, data);
-			j += 10;
-		}
-		i += 10;
-	}
+	cam = scene->cam;
+	if (keycode == KB_UP)
+		to_rotate = ROT_MAT_POS_PITCH;
+	if (keycode == KB_DOWN)
+		to_rotate = ROT_MAT_NEG_PITCH;
+	if (keycode == KB_LEFT)
+		to_rotate = ROT_MAT_POS_YAW;
+	if (keycode == KB_RIGHT)
+		to_rotate = ROT_MAT_NEG_YAW;
+	focus_dist = length3(cam->screen_plane);
+	rotated = mat3mat3((t_mat3){.rows = {
+		norm3(cam->screen_plane),
+		cam->v_3,
+		cam->u_3
+		}}, to_rotate);
+	cam->screen_plane = fmult3(rotated.rows[0], focus_dist);
+	cam->v_3 = rotated.rows[1];
+	cam->u_3 = rotated.rows[2];
 }
