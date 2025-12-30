@@ -11,10 +11,12 @@ static inline void	put_pixel_to_img(t_img *data, int x, int y, t_colour colour)
 		+ (unsigned int)colour.b;
 }
 
-void	full_render(t_shapes objs, t_camera cam, t_img *data)
+void	full_render(t_shapes *objs, t_camera cam, t_img *data)
 {
 	size_t	i;
 	size_t	j;
+	t_vec3 rd;
+	t_colour temp;
 
 	i = -1;
 	while ( ++i < SCREEN_Y)
@@ -23,7 +25,7 @@ void	full_render(t_shapes objs, t_camera cam, t_img *data)
 		while ( ++j < SCREEN_X)
 		{
 			rd = get_uv(j, i, cam);
-			temp = raymarch(cam.camera_pos, rd, &objs);
+			temp = raymarch(cam.camera_pos, rd, objs);
 			put_pixel_to_img(data, j, i, temp);
 		}
 	}

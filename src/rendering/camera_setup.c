@@ -19,7 +19,7 @@ static void	find_pitch_yaw(t_vec3 view_dir, float *pitch, float *yaw)
 }
 
 t_camera	camera_setup(t_vec3 position, t_vec3 view_dir,
-					float horizontal_fov)
+	float horizontal_fov)
 {
 	t_camera	res;
 	t_mat3		rotation;
