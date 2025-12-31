@@ -18,6 +18,7 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/rendering/full_render.c \
 	src/rendering/get_normal.c \
 	src/rendering/get_uv.c \
+	src/rendering/put_pixel_to_img.c \
 	src/rendering/raymarch.c \
 	src/rendering/scene.c \
 	src/rendering/soft_shadow.c \
