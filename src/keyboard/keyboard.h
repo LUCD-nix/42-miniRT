@@ -20,6 +20,7 @@
 // # include <X11/keysymdef.h>
 
 # define KB_ESCAPE 0xff1b
+# define KB_SPACE 0x0020
 # define KB_LEFT 0xff51
 # define KB_UP 0xff52
 # define KB_RIGHT 0xff53
@@ -32,6 +33,7 @@
 # define KB_D 0x0064
 # define KB_LEFT_SHIFT 0xffe1
 # define KB_LEFT_CTRL 0xffe3
+# define KB_ENTER 0xff0d
 
 # define MOVE_DELTA 0.3f
 

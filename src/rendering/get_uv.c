@@ -12,11 +12,7 @@
 #include "rendering.h"
 #include <stddef.h>
 
-// Have :
-// 	- camera pos in t_vec3
-// 	- camera angle normed
-// 	- FOV : assume we're talking about horizontal FOV
-inline t_vec3	get_uv(size_t px, size_t py, t_camera screen)
+inline t_vec3	get_uv(size_t px, size_t py, t_camera *cam)
 {
 	t_vec3	res;
 	float	u;
@@ -24,8 +20,8 @@ inline t_vec3	get_uv(size_t px, size_t py, t_camera screen)
 
 	u = ((float) px / SCREEN_X - 0.5)  * (16.f / 9.f);
 	v = (float) py / SCREEN_Y - 0.5;
-	res = fmult3(screen.u_3, u);
-	res = diff3(res, fmult3(screen.v_3, v));
-	res = add3(res, screen.screen_plane);
+	res = fmult3(cam->u_3, u);
+	res = diff3(res, fmult3(cam->v_3, v));
+	res = add3(res, cam->screen_plane);
 	return (norm3(res));
 }

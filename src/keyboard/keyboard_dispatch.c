@@ -16,6 +16,11 @@ int		keyboard_dispatch(int keycode, void *param)
 	t_scene	*scene;
 
 	scene = (t_scene *) param;
+	if (keycode == KB_ENTER)
+		return (full_render(scene->objs, scene->cam, scene->img),
+				mlx_put_image_to_window(scene->mlx, scene->mlx_window,
+					scene->img->img, 0, 0),
+				0);
 	if (keycode == KB_ESCAPE)
 		free_mlx_and_exit(scene);
 	else if ((keycode >= KB_LEFT && keycode <= KB_DOWN)

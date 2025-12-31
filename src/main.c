@@ -105,7 +105,7 @@ int	main(void)
 	};
 	register_mlx_callbacks(window, &scene);
 	clock_t start = clock();
-	full_render(&objs, cam, &data);
+	full_render(&objs, &cam, &data);
 	clock_t end = clock();
 	double render_time_s = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("finished rendering in %lf seconds\n", render_time_s);

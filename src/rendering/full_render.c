@@ -1,6 +1,6 @@
 #include "rendering.h"
 
-void	full_render(t_shapes *objs, t_camera cam, t_img *data)
+void	full_render(t_shapes *objs, t_camera *cam, t_img *data)
 {
 	size_t	i;
 	size_t	j;
@@ -14,7 +14,7 @@ void	full_render(t_shapes *objs, t_camera cam, t_img *data)
 		while ( ++j < SCREEN_X)
 		{
 			rd = get_uv(j, i, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
+			temp = raymarch(cam->camera_pos, rd, objs);
 			put_pixel_to_img(data, j, i, temp);
 		}
 	}

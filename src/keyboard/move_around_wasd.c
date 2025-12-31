@@ -40,7 +40,7 @@ void	move_around_wasd(int keycode, t_scene *scene)
 		delta = (t_vec3){0.f, 0.f, -MOVE_DELTA};
 	if (keycode == KB_LEFT_SHIFT)
 		delta = (t_vec3){0.f, -MOVE_DELTA, 0.f};
-	if (keycode == KB_LEFT_CTRL)
+	if (keycode == KB_SPACE)
 		delta = (t_vec3){0.f, MOVE_DELTA, 0.f};
 	cam->camera_pos = add_in_camera_space(cam, delta);
 }

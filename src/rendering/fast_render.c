@@ -29,7 +29,7 @@ static void	big_pixel(t_colour colour, size_t px, size_t py, t_img *data)
 	}
 }
 
-void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
+void	fast_render(t_shapes *objs, t_camera *cam, t_img *data)
 {
 	int			i;
 	int			j;
@@ -43,7 +43,7 @@ void	fast_render(t_shapes *objs, t_camera cam, t_img *data)
 		while (j < SCREEN_X - 10)
 		{
 			rd = get_uv(j + 5, i + 5, cam);
-			temp = raymarch(cam.camera_pos, rd, objs);
+			temp = raymarch(cam->camera_pos, rd, objs);
 			big_pixel(temp, i, j, data);
 			j += 10;
 		}
