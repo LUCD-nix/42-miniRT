@@ -18,16 +18,18 @@ int		keyboard_dispatch(int keycode, void *param)
 	scene = (t_scene *) param;
 	if (keycode == KB_ESCAPE)
 		free_mlx_and_exit(scene);
-	else if (keycode >= KB_LEFT && keycode <= KB_DOWN)
+	else if ((keycode >= KB_LEFT && keycode <= KB_DOWN)
+			|| keycode == KB_Q
+			|| keycode == KB_E)
 		look_around_arrows(keycode, scene);
 	else if (keycode == KB_W
 			|| keycode == KB_A
 			|| keycode == KB_S
 			|| keycode == KB_D
-			|| keycode == KB_LEFT_CTRL
+			|| keycode == KB_SPACE
 			|| keycode == KB_LEFT_SHIFT)
 		move_around_wasd(keycode, scene);
-	fast_render(scene->objs, *scene->cam, scene->img);
+	fast_render(scene->objs, scene->cam, scene->img);
 	mlx_put_image_to_window(scene->mlx, scene->mlx_window,
 		scene->img->img, 0, 0);
 	return (0);

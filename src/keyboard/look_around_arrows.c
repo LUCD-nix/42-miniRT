@@ -11,12 +11,25 @@
 /* ************************************************************************** */
 #include "keyboard.h"
 
+static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
+{
+	float	focus_dist;
+	t_mat3	rotated;
+	
+	focus_dist = length3(cam->screen_plane);
+	rotated = mat3mat3(to_rotate,(t_mat3){.rows = {
+		norm3(cam->screen_plane),
+		cam->v_3,
+		cam->u_3
+		}});
+	cam->screen_plane = fmult3(rotated.rows[0], focus_dist);
+	cam->v_3 = rotated.rows[1];
+	cam->u_3 = rotated.rows[2];
+}
 void	look_around_arrows(int keycode, t_scene *scene)
 {
 	t_camera	*cam;
 	t_mat3		to_rotate;
-	t_mat3		rotated;
-	float		focus_dist;
 
 	cam = scene->cam;
 	if (keycode == KB_UP)
@@ -27,13 +40,9 @@ void	look_around_arrows(int keycode, t_scene *scene)
 		to_rotate = ROT_MAT_POS_YAW;
 	if (keycode == KB_RIGHT)
 		to_rotate = ROT_MAT_NEG_YAW;
-	focus_dist = length3(cam->screen_plane);
-	rotated = mat3mat3((t_mat3){.rows = {
-		norm3(cam->screen_plane),
-		cam->v_3,
-		cam->u_3
-		}}, to_rotate);
-	cam->screen_plane = fmult3(rotated.rows[0], focus_dist);
-	cam->v_3 = rotated.rows[1];
-	cam->u_3 = rotated.rows[2];
+	if (keycode == KB_Q)
+		to_rotate = ROT_MAT_NEG_ROLL;
+	if (keycode == KB_E)
+		to_rotate = ROT_MAT_POS_ROLL;
+	rotate_view(to_rotate, cam);
 }

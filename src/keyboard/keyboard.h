@@ -24,6 +24,8 @@
 # define KB_UP 0xff52
 # define KB_RIGHT 0xff53
 # define KB_DOWN 0xff54
+# define KB_Q 0x0071
+# define KB_E 0x0065
 # define KB_W 0x0077
 # define KB_A 0x0061
 # define KB_S 0x0073
@@ -38,7 +40,7 @@
 # define COS_PI_12 0.965925826
 # define SIN_PI_12 0.258819045
 
-# define ROT_MAT_POS_PITCH (t_mat3) {\
+# define ROT_MAT_NEG_PITCH (t_mat3) {\
 	.rows = {\
 		(t_vec3){COS_PI_12, -SIN_PI_12, 0},\
 		(t_vec3){SIN_PI_12, COS_PI_12, 0},\
@@ -46,7 +48,7 @@
 	}\
 }\
 
-# define ROT_MAT_NEG_PITCH (t_mat3) {\
+# define ROT_MAT_POS_PITCH (t_mat3) {\
 	.rows = {\
 		(t_vec3){COS_PI_12, SIN_PI_12, 0},\
 		(t_vec3){-SIN_PI_12, COS_PI_12, 0},\
@@ -54,7 +56,7 @@
 	}\
 }\
 
-# define ROT_MAT_POS_YAW (t_mat3) {\
+# define ROT_MAT_NEG_YAW (t_mat3) {\
 	.rows = {\
 		(t_vec3){COS_PI_12, 0, SIN_PI_12},\
 		(t_vec3){0, 1, 0},\
@@ -62,11 +64,27 @@
 	}\
 }\
 
-# define ROT_MAT_NEG_YAW (t_mat3) {\
+# define ROT_MAT_POS_YAW (t_mat3) {\
 	.rows = {\
 		(t_vec3){COS_PI_12, 0, -SIN_PI_12},\
 		(t_vec3){0, 1, 0},\
 		(t_vec3){SIN_PI_12, 0, COS_PI_12},\
+	}\
+}\
+
+# define ROT_MAT_POS_ROLL (t_mat3) {\
+	.rows = {\
+		(t_vec3){1, 0, 0},\
+		(t_vec3){0, COS_PI_12, SIN_PI_12},\
+		(t_vec3){0, -SIN_PI_12, COS_PI_12},\
+	}\
+}\
+
+# define ROT_MAT_NEG_ROLL (t_mat3) {\
+	.rows = {\
+		(t_vec3){1, 0, 0},\
+		(t_vec3){0, COS_PI_12, -SIN_PI_12},\
+		(t_vec3){0, SIN_PI_12, COS_PI_12},\
 	}\
 }\
 
