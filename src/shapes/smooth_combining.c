@@ -28,7 +28,7 @@ t_colour	rgb_lerp(t_cdist o1, t_cdist o2)
 	return (res);
 }
 
-static inline float	smooth_min(float d1, float d2, float k)
+inline float	smooth_min(float d1, float d2, float k)
 {
 	float	h;
 
@@ -37,7 +37,7 @@ static inline float	smooth_min(float d1, float d2, float k)
 	return (fminf(d1, d2) - h * h * 0.25f / k);
 }
 
-inline t_cdist	op_smooth_union(t_cdist o1, t_cdist o2, float k)
+t_cdist	op_smooth_union(t_cdist o1, t_cdist o2, float k)
 {
 	return ((t_cdist){
 		smooth_min(o1.dist, o2.dist, k),
@@ -45,7 +45,7 @@ inline t_cdist	op_smooth_union(t_cdist o1, t_cdist o2, float k)
 	});
 }
 
-inline t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
+t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
 {
 	// return (-op_smooth_union(-d1, d2, k));
 	return ((t_cdist){
@@ -54,7 +54,7 @@ inline t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
 	});
 }
 
-inline t_cdist	op_smooth_intersection(t_cdist o1, t_cdist o2, float k)
+t_cdist	op_smooth_intersection(t_cdist o1, t_cdist o2, float k)
 {
 	// return (-op_smooth_union(-d1, -d2, k));
 	return ((t_cdist){

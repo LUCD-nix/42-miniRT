@@ -12,7 +12,7 @@
 #include "rendering.h"
 #include <stddef.h>
 
-inline t_vec3	get_uv(size_t px, size_t py, t_camera *cam)
+t_vec3	get_uv(size_t px, size_t py, t_camera *cam)
 {
 	t_vec3	res;
 	float	u;

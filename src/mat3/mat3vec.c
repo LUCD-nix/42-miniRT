@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "mat3.h"
 
-inline t_vec3	mat3vec(t_mat3 a, t_vec3 v)
+t_vec3	mat3vec(t_mat3 a, t_vec3 v)
 {
 	return ((t_vec3){
 		.x = dot3(a.rows[0], v),

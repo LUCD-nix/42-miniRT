@@ -13,7 +13,7 @@
 #include <math.h>
 #include <stddef.h>
 
-inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
+t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 {
 	t_cdist		colour_dist;
 	t_vec3		ray;

@@ -12,7 +12,7 @@
 #include "lighting.h"
 #include <stdio.h>
 
-inline t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
+t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
 {
 	t_colour	res;
 

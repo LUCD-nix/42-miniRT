@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "mat3.h"
 
-inline t_mat3	transp3(t_mat3 m)
+t_mat3	transp3(t_mat3 m)
 {
 	t_mat3	res;
 

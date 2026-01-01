@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "rendering.h"
 
-inline t_vec3	get_normal(t_vec3 point, t_shapes *objs)
+t_vec3	get_normal(t_vec3 point, t_shapes *objs)
 {
 	t_vec3	normal;
 	float	eps;

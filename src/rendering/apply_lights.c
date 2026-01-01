@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "rendering.h"
 
-inline t_colour	apply_lights(t_shapes *objs, t_vec3 ray, t_cdist colour_dist)
+t_colour	apply_lights(t_shapes *objs, t_vec3 ray, t_cdist colour_dist)
 {
 	t_colour	ambient_colour;
 	t_colour	point_colour;

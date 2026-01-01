@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline float	dot3(t_vec3 a, t_vec3 b)
+float	dot3(t_vec3 a, t_vec3 b)
 {
 	return (
 		a.x * b.x

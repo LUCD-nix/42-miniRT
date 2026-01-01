@@ -14,7 +14,7 @@
 // Here we're using extrinsic rotation, angles stay fixed w/ original coord
 // system https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
 
-inline t_mat3 rot_mat3(float a, float b, float g)
+t_mat3 rot_mat3(float a, float b, float g)
 {
 	t_mat3	rot_x;
 	t_mat3	rot_y;

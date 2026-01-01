@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec2.h"
 
-inline float	length2(t_vec2 v)
+float	length2(t_vec2 v)
 {
 	return (sqrtf(dot2(v, v)));
 }

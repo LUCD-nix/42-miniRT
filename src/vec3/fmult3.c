@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline t_vec3	fmult3(t_vec3 v, float s)
+t_vec3	fmult3(t_vec3 v, float s)
 {
 	return ((t_vec3){v.x * s, v.y * s, v.z * s});
 }

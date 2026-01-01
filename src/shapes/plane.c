@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float plane_sdf(t_vec3 p, union u_shape s)
+float plane_sdf(t_vec3 p, union u_shape s)
 {
 	return (dot3(p, s.plane.normal) - s.plane.height);
 }

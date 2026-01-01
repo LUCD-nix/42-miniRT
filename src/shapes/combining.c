@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline t_cdist	op_union(t_cdist d1, t_cdist d2, float k)
+t_cdist	op_union(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
 	// min
@@ -20,7 +20,7 @@ inline t_cdist	op_union(t_cdist d1, t_cdist d2, float k)
 	return (d2);
 }
 
-inline t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k)
+t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
 	// max (d1, -d2)
@@ -29,7 +29,7 @@ inline t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k)
 	return (d2);
 }
 
-inline t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k)
+t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
 	// max
@@ -38,7 +38,7 @@ inline t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k)
 	return (d2);
 }
 
-inline t_cdist	op_xor(t_cdist d1, t_cdist d2, float k)
+t_cdist	op_xor(t_cdist d1, t_cdist d2, float k)
 {
 	(void) k;
 	// return (fmaxf(fminf(d1, d2), -fmaxf(d1, d2)));

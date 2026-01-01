@@ -12,7 +12,7 @@
 #include "vec3.h"
 #include "../mat3/mat3.h"
 
-inline t_vec3	trans_rot3(t_vec3 point, t_vec3 new_origin, t_mat3 rotation)
+t_vec3	trans_rot3(t_vec3 point, t_vec3 new_origin, t_mat3 rotation)
 {
 	point = diff3(point, new_origin);
 	return (mat3vec(rotation, point));

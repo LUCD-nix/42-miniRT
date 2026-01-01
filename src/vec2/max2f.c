@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec2.h"
 
-inline t_vec2	max2f(t_vec2 v, float s)
+t_vec2	max2f(t_vec2 v, float s)
 {
 	return ((t_vec2){
 		fmaxf(v.x, s),
