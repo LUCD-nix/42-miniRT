@@ -17,11 +17,13 @@ static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
 	t_mat3	rotated;
 	
 	focus_dist = length3(cam->screen_plane);
-	rotated = mat3mat3(to_rotate,(t_mat3){.rows = {
-		norm3(cam->screen_plane),
-		cam->v_3,
-		cam->u_3
-		}});
+	rotated = mat3mat3(to_rotate, (t_mat3){
+		.rows = {
+			norm3(cam->screen_plane),
+			cam->v_3,
+			cam->u_3
+		}
+	});
 	cam->screen_plane = fmult3(rotated.rows[0], focus_dist);
 	cam->v_3 = rotated.rows[1];
 	cam->u_3 = rotated.rows[2];
