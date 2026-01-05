@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_mlx_and_exit.h                                :+:      :+:    :+:   */
+/*   free_mlx_and_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/05 14:01:48 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "keyboard.h"
+
 
 int	free_mlx_and_exit(t_scene *scene)
 {

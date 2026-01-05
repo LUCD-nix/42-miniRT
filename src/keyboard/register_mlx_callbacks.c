@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   register_mlx_callbacks.h                           :+:      :+:    :+:   */
+/*   register_mlx_callbacks.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/05 14:02:26 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "keyboard.h"
+
 
 void	register_mlx_callbacks(void *mlx_window, t_scene *scene)
 {

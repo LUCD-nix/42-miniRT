@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_light_to_obj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:51:17 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/04 16:51:20 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/05 14:03:10 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "lighting.h"
+
 #include <stdio.h>
 
-t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
+inline t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
 {
 	t_colour	res;
 

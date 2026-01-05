@@ -1,12 +1,7 @@
 NAME = miniRT
 
-CFILES = src/keyboard/free_mlx_and_exit.c \
-	src/keyboard/keyboard_dispatch.c \
-	src/keyboard/look_around_arrows.c \
-	src/keyboard/move_around_wasd.c \
-	src/keyboard/register_mlx_callbacks.c \
+CFILES = src/main.c \
 	src/lighting/add_light_to_obj.c \
-	src/main.c \
 	src/mat3/mat3mat3.c \
 	src/mat3/mat3vec.c \
 	src/mat3/rot_mat3.c \
@@ -18,7 +13,6 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/rendering/full_render.c \
 	src/rendering/get_normal.c \
 	src/rendering/get_uv.c \
-	src/rendering/put_pixel_to_img.c \
 	src/rendering/raymarch.c \
 	src/rendering/scene.c \
 	src/rendering/soft_shadow.c \
@@ -57,7 +51,7 @@ MLIBXDIR = minilibx-linux/
 LIBFT := ${LIBFTDIR}libft.a
 MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
-CFLAGS = -std=gnu99 -ggdb3 -Ofast -Wall -Wextra -Werror -flto \
+CFLAGS = -std=gnu99 -O3 \
 	-ffast-math \
 	-funsafe-math-optimizations \
 	-fno-math-errno \

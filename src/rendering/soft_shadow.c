@@ -13,8 +13,13 @@
 #define SHADOW_DIST_MIN 0.1f
 #define SHADOW_DIST_MAX 10.f
 
+<<<<<<< HEAD
 // see if we can get these to work, same principle but reduces the banding
 // and has a darker penumbra
+=======
+// The best looking soft shadows, but expensive to compute
+// see https://iquilezles.org/articles/rmshadows/
+>>>>>>> origin/point-light
 // inline float	soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point)
 // {
 // 	t_vec3	direction;
@@ -49,7 +54,11 @@ float soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point)
 	for( int i=0; i<256 && t<SHADOW_DIST_MAX; i++ )
 	{
 		float h = scene(add3(point, fmult3(direction, t)), objs).dist;
+<<<<<<< HEAD
 		if( h < SURFACE_DIST )
+=======
+		if( h<0.001 )
+>>>>>>> origin/point-light
 			return 0.0;
 		res = fminf( res, k*h/t );
 		t += h;
