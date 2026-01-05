@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fmult3.c                                           :+:      :+:    :+:   */
+/*   add_light_to_obj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 12:28:22 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/01 12:30:04 by lucorrei         ###   ########.fr       */
+/*   Created: 2025/12/04 16:51:17 by lucorrei          #+#    #+#             */
+/*   Updated: 2025/12/04 16:51:20 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "vec3.h"
+#include "lighting.h"
+#include <stdio.h>
 
-t_vec3	fmult3(t_vec3 v, float s)
+t_colour	add_light_to_obj(t_colour obj, t_colour light, float intensity)
 {
-	return ((t_vec3){v.x * s, v.y * s, v.z * s});
+	t_colour	res;
+
+	res.a = obj.a * (intensity * light.a / 255.f);
+	res.r = obj.r * (intensity * light.r / 255.f);
+	res.g = obj.g * (intensity * light.g / 255.f);
+	res.b = obj.b * (intensity * light.b / 255.f);
+	return (res);
 }

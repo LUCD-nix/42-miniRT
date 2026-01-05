@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fmult3.c                                           :+:      :+:    :+:   */
+/*   free_mlx_and_exit.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 12:28:22 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/01 12:30:04 by lucorrei         ###   ########.fr       */
+/*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
+/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "vec3.h"
+#include "keyboard.h"
 
-t_vec3	fmult3(t_vec3 v, float s)
+int	free_mlx_and_exit(t_scene *scene)
 {
-	return ((t_vec3){v.x * s, v.y * s, v.z * s});
+	void	*mlx;
+	t_img	*image_data;
+
+	image_data = scene->img;
+	mlx = scene->mlx;
+	mlx_destroy_image(mlx, image_data->img);
+	mlx_destroy_window(mlx, scene->mlx_window);
+	mlx_destroy_display(mlx);
+	free(mlx);
+	exit(EXIT_SUCCESS);
+	return (0);
 }

@@ -1,14 +1,27 @@
 NAME = miniRT
 
-CFILES = src/main.c \
+CFILES = src/keyboard/free_mlx_and_exit.c \
+	src/keyboard/keyboard_dispatch.c \
+	src/keyboard/look_around_arrows.c \
+	src/keyboard/move_around_wasd.c \
+	src/keyboard/register_mlx_callbacks.c \
+	src/lighting/add_light_to_obj.c \
+	src/main.c \
 	src/mat3/mat3mat3.c \
 	src/mat3/mat3vec.c \
 	src/mat3/rot_mat3.c \
+	src/mat3/rot_mat3_int.c \
 	src/mat3/transp3.c \
+	src/rendering/apply_lights.c \
+	src/rendering/camera_setup.c \
+	src/rendering/fast_render.c \
+	src/rendering/full_render.c \
 	src/rendering/get_normal.c \
-	src/rendering/point_light.c \
+	src/rendering/get_uv.c \
+	src/rendering/put_pixel_to_img.c \
 	src/rendering/raymarch.c \
-	src/rendering/sdf.c \
+	src/rendering/scene.c \
+	src/rendering/soft_shadow.c \
 	src/shapes/box.c \
 	src/shapes/combining.c \
 	src/shapes/cylinder.c \
@@ -44,7 +57,7 @@ MLIBXDIR = minilibx-linux/
 LIBFT := ${LIBFTDIR}libft.a
 MLIBX := ${MLIBXDIR}libmlx.a ${MLIBXDIR}libmlx_Linux.a
 
-CFLAGS = -Wall -Wextra -Werror -O3 -ggdb3 \
+CFLAGS = -std=gnu99 -ggdb3 -Ofast -Wall -Wextra -Werror -flto \
 	-ffast-math \
 	-funsafe-math-optimizations \
 	-fno-math-errno \
@@ -54,10 +67,13 @@ LFLAGS := -I${LIBFTDIR} -I${MLIBXDIR} -lXext -lX11 -lm
 
 all: ${NAME}
 
+run : ${NAME}
+	./${NAME}
+
 ${NAME}:  ${OBJS} ${LIBFT} ${MLIBX}
 	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${MLIBX} ${LFLAGS} -o ${NAME}
 
-%.o: %.c minishell.h
+%.o: %.c
 	${CC} -c ${CFLAGS} $< -o $@
 
 ${LIBFT}:
@@ -77,4 +93,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: fclean clean all re bonus
+.PHONY: fclean clean all re bonus run

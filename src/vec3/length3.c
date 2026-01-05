@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline float	length3(t_vec3 v)
+float	length3(t_vec3 v)
 {
 	return (sqrtf(dot3(v, v)));
 }

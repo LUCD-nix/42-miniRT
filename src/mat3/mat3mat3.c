@@ -12,7 +12,7 @@
 
 #include "mat3.h"
 
-inline t_mat3	mat3mat3(t_mat3 a, t_mat3 b)
+t_mat3	mat3mat3(t_mat3 a, t_mat3 b)
 {
 	t_mat3	res;
 	int		i;

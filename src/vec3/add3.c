@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline t_vec3	add3(t_vec3 a, t_vec3 b)
+t_vec3	add3(t_vec3 a, t_vec3 b)
 {
 	return ((t_vec3){
 		a.x + b.x,

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rot_mat3.c                                         :+:      :+:    :+:   */
+/*   rot_mat3_int.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:50:56 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/08 14:50:59 by lucorrei         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:53:08 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mat3.h"
 
-// Here we're using extrinsic rotation, angles stay fixed w/ original coord
-// system https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
+// This is the same as rot_mat3 but we're using intrinsic rotation
+// https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
 
-t_mat3 rot_mat3(float a, float b, float g)
+t_mat3 rot_mat3_int(float a, float b, float g)
 {
 	t_mat3	rot_x;
 	t_mat3	rot_y;
@@ -35,6 +35,5 @@ t_mat3 rot_mat3(float a, float b, float g)
 		(t_vec3) {sinf(g), cosf(g), 0},
 		(t_vec3) {0, 0, 1}
 	}};
-	// TODO : this is probably not optimized away, consider writing manually
-	return (mat3mat3(rot_x, mat3mat3(rot_y, rot_z)));
+	return (mat3mat3(rot_z, mat3mat3(rot_y, rot_x)));
 }

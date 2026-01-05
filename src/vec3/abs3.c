@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec3.h"
 
-inline t_vec3	abs3(t_vec3 v)
+t_vec3	abs3(t_vec3 v)
 {
 	return ((t_vec3){.x = fabsf(v.x), .y = fabsf(v.y), .z = fabsf(v.z) });
 }

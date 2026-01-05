@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "shapes.h"
 
-inline float	box_sdf(t_vec3 p, union u_shape shape)
+float	box_sdf(t_vec3 p, union u_shape shape)
 {
 	t_vec3	q;
 	float	inside;

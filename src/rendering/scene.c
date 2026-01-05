@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "rendering.h"
 
-inline t_cdist	scene(t_vec3	point, t_shapes *objs)
+t_cdist	scene(t_vec3	point, t_shapes *objs)
 {
 	short	i;
 	t_cdist	temp;

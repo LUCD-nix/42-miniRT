@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "vec2.h"
 
-inline t_vec2	add2(t_vec2 a, t_vec2 b)
+t_vec2	add2(t_vec2 a, t_vec2 b)
 {
 	return ((t_vec2){
 		a.x + b.x,
