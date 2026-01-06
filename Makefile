@@ -45,7 +45,19 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/vec3/max3f.c \
 	src/vec3/norm3.c \
 	src/vec3/trans_rot3.c \
-	src/window/init_window.c
+	src/window/init_window.c \
+	src/parsing/ft_atof_safe.c \
+	src/parsing/parse_ambient.c \
+	src/parsing/parse_camera.c \
+	src/parsing/parse_color.c \
+	src/parsing/parse_cylinder.c \
+	src/parsing/parse_light.c \
+	src/parsing/parse_plane.c \
+	src/parsing/parse_scene.c \
+	src/parsing/parse_sphere.c \
+	src/parsing/parse_vec3.c \
+	src/parsing/utils_split.c \
+	src/parsing/debug_dump.c 
 
 OBJS := $(CFILES:.c=.o)
 

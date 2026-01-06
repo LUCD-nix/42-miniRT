@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_mlx_and_exit.h                                :+:      :+:    :+:   */
+/*   free_mlx_and_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:37:51 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "keyboard.h"
 
-int	free_mlx_and_exit(t_scene *scene)
+int	free_mlx_and_exit(t_scene_lucas *scene)
 {
 	void	*mlx;
 	t_img	*image_data;

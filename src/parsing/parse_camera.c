@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 20:44:00 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 10:40:27 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 14:13:44 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	validate_camera_tokens(char **tokens, t_camera_data *cam, int line_num)
+static int	validate_camera_tokens(char **tokens, t_camera_data *cam,
+		int line_num)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
 		return (0);
@@ -29,9 +30,8 @@ static int	validate_camera_tokens(char **tokens, t_camera_data *cam, int line_nu
 
 int	parse_camera(char *line, t_scene *scene, int line_num)
 {
-	char		**tokens;
+	char			**tokens;
 	t_camera_data	temp;
-	double		fov_temp;
 
 	if (scene->has_camera)
 		return (printf("Error\nLine %d: Duplicate camera\n", line_num), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:41 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 10:35:29 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 13:48:57 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	parse_color(char *str, t_colour *color)
 	double	b;
 	int		success;
 
+	printf("COLOR RAW: [%s]\n", str);
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (0);
@@ -32,7 +33,7 @@ int	parse_color(char *str, t_colour *color)
 		success = 0;
 	else if (!ft_atof_safe(rgb[2], &b))
 		success = 0;
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	if (success && (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255))
 		success = 0;
 	if (success)
 		*color = (t_colour){0xFF, (int)r, (int)g, (int)b};

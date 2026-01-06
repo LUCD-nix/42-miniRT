@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:38:31 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,19 @@
 	}\
 }\
 
-typedef struct s_scene
+typedef struct s_scene_lucas
 {
 	t_shapes	*objs;
 	t_camera	*cam;
 	void		*mlx;
 	void		*mlx_window;
 	t_img		*img;
-}	t_scene;
+}	t_scene_lucas;
 
-void	register_mlx_callbacks(void *mlx_window, t_scene *scene);
+void	register_mlx_callbacks(void *mlx_window, t_scene_lucas *scene);
 int		keyboard_dispatch(int keycode, void *param);
-int		free_mlx_and_exit(t_scene *scene);
-void	look_around_arrows(int keycode, t_scene *scene);
-void	move_around_wasd(int keycode, t_scene *scene);
+int		free_mlx_and_exit(t_scene_lucas *scene);
+void	look_around_arrows(int keycode, t_scene_lucas *scene);
+void	move_around_wasd(int keycode, t_scene_lucas *scene);
 
 #endif // KEYBOARD_H

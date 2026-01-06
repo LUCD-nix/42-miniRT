@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:13:19 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 16:13:43 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 13:51:28 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ double	ft_atof_safe(const char *str, double *result)
 	sign = parse_sign(str, &i);
 	value = parse_integer(str, &i, &has_digit);
 	fraction = parse_decimale(str, &i, &has_digit);
+	i = skip_spaces(str, i);
 	if (str[i] != '\0' || !has_digit)
 		return (0);
 	*result = sign * (value + fraction);
