@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:33:11 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 22:44:46 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 10:31:13 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static int	dispatch_line(char *line, t_scene *scene, int line_num)
 		return (parse_light(line, scene, line_num));
 	else if (line[0] == 's' && line[1] == 'p' && line[2] == ' ')
 		return (parse_sphere(line, scene, line_num));
+	else if (line[0] == 'p' && line[1] == 'l' && line[2] == ' ')
+		return (parse_plane(line, scene, line_num));
+	else if (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
+		return (parse_cylinder(line, scene, line_num));
 	else
 		return (printf("Error\nLine %d: Unknown identifier\n", line_num), 0);
 }

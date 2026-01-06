@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 20:44:00 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 22:23:22 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 10:40:27 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	validate_camera_tokens(char **tokens, t_camera *cam, int line_num)
+static int	validate_camera_tokens(char **tokens, t_camera_data *cam, int line_num)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
 		return (0);
@@ -30,7 +30,7 @@ static int	validate_camera_tokens(char **tokens, t_camera *cam, int line_num)
 int	parse_camera(char *line, t_scene *scene, int line_num)
 {
 	char		**tokens;
-	t_camera	temp;
+	t_camera_data	temp;
 	double		fov_temp;
 
 	if (scene->has_camera)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:08:09 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 22:23:28 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 10:40:13 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@
 typedef struct s_ambient
 {
 	float			ratio;
-	unsigned int	color;
+	t_colour		color;
 }					t_ambient;
 
-typedef struct s_camera
+typedef struct s_camera_data
 {
 	t_vec3			position;
 	t_vec3			orientation;
 	int				fov;
-}					t_camera;
+}					t_camera_data;
 
 typedef struct s_light
 {
 	t_vec3			position;
 	float			brightness;
-	unsigned int	color;
+	t_colour		color;
 }					t_light;
 
 typedef struct s_scene
 {
 	t_ambient		ambient;
-	t_camera		camera;
+	t_camera_data		camera;
 	t_light			light;
 	int				has_ambient;
 	int				has_camera;
@@ -54,7 +54,7 @@ typedef struct s_scene
 
 double				ft_atof_safe(const char *str, double *result);
 int					parse_vec3(char *str, t_vec3 *vec);
-int					parse_color(char *str, unsigned int *color);
+int					parse_color(char *str, t_colour *color);
 void				free_split(char **split);
 
 int					parse_ambient(char *line, t_scene *scene, int line_num);
@@ -62,5 +62,7 @@ int					parse_camera(char *line, t_scene *scene, int line_num);
 int					parse_light(char *line, t_scene *scene, int line_num);
 
 int					parse_sphere(char *line, t_scene *scene, int line_num);
+int					parse_plane(char *line, t_scene *scene, int line_num);
+int					parse_cylinder(char *line, t_scene *scene, int line_num);
 
 #endif

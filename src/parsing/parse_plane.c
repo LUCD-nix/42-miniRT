@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_sphere.c                                     :+:      :+:    :+:   */
+/*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 21:22:10 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 10:34:01 by hlongin          ###   ########.fr       */
+/*   Created: 2025/12/21 14:07:33 by hlongin           #+#    #+#             */
+/*   Updated: 2026/01/06 10:32:25 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	validate_sphere_tokens(char **tokens, t_vec3 *position,
-		double *diameter, t_colour *color)
+static int	validate_plane_tokens(char **tokens, t_vec3 *coord, t_vec3 *normal,
+		t_colour *color)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
 		return (0);
-	if (!parse_vec3(tokens[1], position))
+	if (!parse_vec3(tokens[1], coord))
 		return (0);
-	if (!ft_atof_safe(tokens[2], diameter))
+	if (!parse_vec3(tokens[2], normal))
 		return (0);
-	if (*diameter <= 0.0)
-		return (0);
+	*normal = norm3(*normal);
 	if (!parse_color(tokens[3], color))
 		return (0);
 	return (1);
 }
 
-int	parse_sphere(char *line, t_scene *scene, int line_num)
+int	parse_plane(char *line, t_scene *scene, int line_num)
 {
 	char			**tokens;
-	t_vec3			position;
-	double			diameter;
+	t_vec3			coord;
+	t_vec3			normal;
 	t_colour		color;
 	int				idx;
 
@@ -41,14 +40,14 @@ int	parse_sphere(char *line, t_scene *scene, int line_num)
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (0);
-	if (!validate_sphere_tokens(tokens, &position, &diameter, &color))
-		return (printf("Error\nLine %d: Invalid sphere data\n", line_num),
+	if (!validate_plane_tokens(tokens, &coord, &normal, &color))
+		return (printf("Error\nLine %d: Invalid plane data\n", line_num),
 			free_split(tokens), 0);
 	idx = scene->shapes.n_shapes;
-	scene->shapes.shapes[idx].sphere.position = position;
-	scene->shapes.shapes[idx].sphere.radius = (float)(diameter / 2.0);
+	scene->shapes.shapes[idx].plane.normal = normal;
+	scene->shapes.shapes[idx].plane.height = dot3(coord, normal);
 	scene->shapes.colours[idx] = color;
-	scene->shapes.sdfs[idx] = &sphere_sdf;
+	scene->shapes.sdfs[idx] = &plane_sdf;
 	scene->shapes.combine[idx] = &op_union;
 	scene->shapes.smoothing[idx] = 0.0f;
 	scene->shapes.n_shapes++;

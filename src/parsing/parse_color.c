@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:41 by hlongin           #+#    #+#             */
-/*   Updated: 2025/12/17 17:35:58 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 10:35:29 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	parse_color(char *str, unsigned int *color)
+int	parse_color(char *str, t_colour *color)
 {
 	char	**rgb;
 	double	r;
@@ -35,6 +35,6 @@ int	parse_color(char *str, unsigned int *color)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		success = 0;
 	if (success)
-		*color = (0xFF << 24) | ((int)r << 16) | ((int)g << 8) | (int)b;
+		*color = (t_colour){0xFF, (int)r, (int)g, (int)b};
 	return (free_split(rgb), success);
 }
