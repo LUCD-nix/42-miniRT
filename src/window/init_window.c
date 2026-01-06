@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 14:33:10 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/12 14:45:44 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/07 00:00:42 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "window.h"
+
 
 void	init_window(void **mlx_ptr, void **window_ptr, t_img	*data)
 {
