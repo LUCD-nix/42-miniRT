@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   look_around_arrows.h                               :+:      :+:    :+:   */
+/*   look_around_arrows.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:37:22 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "keyboard.h"
+
+#include"keyboard.h"
 
 static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
 {
@@ -28,7 +29,7 @@ static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
 	cam->v_3 = rotated.rows[1];
 	cam->u_3 = rotated.rows[2];
 }
-void	look_around_arrows(int keycode, t_scene *scene)
+void	look_around_arrows(int keycode, t_scene_lucas *scene)
 {
 	t_camera	*cam;
 	t_mat3		to_rotate;

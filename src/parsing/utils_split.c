@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_mlx_and_exit.c                                :+:      :+:    :+:   */
+/*   utils_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2026/01/06 11:37:51 by hlongin          ###   ########.fr       */
+/*   Created: 2025/12/17 17:35:08 by hlongin           #+#    #+#             */
+/*   Updated: 2025/12/17 17:35:41 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keyboard.h"
+#include "parsing.h"
 
-int	free_mlx_and_exit(t_scene_lucas *scene)
+void	free_split(char **split)
 {
-	void	*mlx;
-	t_img	*image_data;
+	int	i;
 
-	image_data = scene->img;
-	mlx = scene->mlx;
-	mlx_destroy_image(mlx, image_data->img);
-	mlx_destroy_window(mlx, scene->mlx_window);
-	mlx_destroy_display(mlx);
-	free(mlx);
-	exit(EXIT_SUCCESS);
-	return (0);
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_dispatch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:39:09 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "keyboard.h"
 
 int		keyboard_dispatch(int keycode, void *param)
 {
-	t_scene	*scene;
+	t_scene_lucas	*scene;
 
-	scene = (t_scene *) param;
+	scene = (t_scene_lucas *) param;
 	if (keycode == KB_ENTER)
 		return (full_render(scene->objs, scene->cam, scene->img),
 				mlx_put_image_to_window(scene->mlx, scene->mlx_window,

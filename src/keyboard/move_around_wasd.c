@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_around_wasd.h                                 :+:      :+:    :+:   */
+/*   move_around_wasd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/11/30 14:09:22 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:37:07 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "keyboard.h"
 
 static t_vec3	add_in_camera_space(t_camera *cam, t_vec3 delta)
@@ -23,7 +24,7 @@ static t_vec3	add_in_camera_space(t_camera *cam, t_vec3 delta)
 	return (add3(cam->camera_pos, to_add));
 }
 
-void	move_around_wasd(int keycode, t_scene *scene)
+void	move_around_wasd(int keycode, t_scene_lucas *scene)
 {
 	t_camera	*cam;
 	t_vec3		delta;
