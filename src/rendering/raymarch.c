@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   raymarch.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:33:38 by lucorrei          #+#    #+#             */
-/*   Updated: 2026/01/05 14:07:08 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/12/12 17:33:38 by lucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "rendering.h"
 #include <math.h>
 #include <stddef.h>
 
-inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
+t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 {
 	t_cdist		colour_dist;
 	t_vec3		ray;
+<<<<<<< HEAD
+=======
 	t_vec3		normal;
 	t_colour	res_colour;
+>>>>>>> origin/point-light
 	size_t		i;
 	float		walk;
 
@@ -33,8 +36,11 @@ inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 		if (fabsf(colour_dist.dist) < SURFACE_DIST)
 			break ;
 	}
-	// background
 	if (i == MAX_STEPS)
+<<<<<<< HEAD
+		return (BACKGROUND);
+	return (apply_lights(objs, ray, colour_dist));
+=======
 		return ((t_colour){0, 0, 0, 0});
 	normal = get_normal(ray, objs);
 	float diffuse = fmaxf(
@@ -53,4 +59,5 @@ inline t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 		res_colour.b + point_colour.b,
 	};
 	return (res_colour);
+>>>>>>> origin/point-light
 }
