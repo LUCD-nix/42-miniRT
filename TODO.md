@@ -4,12 +4,12 @@ Engine:
     https://iquilezles.org/articles/distgradfunctions3d/
     (sphere & cylinder available);
     - [ ] consider updating lerp to be better;
-    - [ ] fix weird colour on cube in demo
     - [ ] fix cylinder - sphere unsmooth being just a hole
 
 Done/abandoned:
 
     - [x] Start work on smooth shading, using raymarching
+    - [x] fix weird colour on cube in demo
         - https://iquilezles.org/articles/rmshadows/
     - [x] Implement a camera struct and make get_uv use it;
     - [x] Rewrite parts of rendering to support colours (sdfs/combining should return tuple of distance + colour)
