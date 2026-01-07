@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2026/01/06 13:57:21 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 23:53:33 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	main(int argc, char **argv)
 	parsed = parse_scene(argv[1]);
 	if (!parsed)
 		return (1);
-	dump_scene(parsed);
 	init_window(&mlx, &window, &data);
 	setup_lights(parsed, &parsed->shapes);
 	cam = setup_camera(parsed);

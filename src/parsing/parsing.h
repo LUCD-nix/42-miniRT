@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:08:09 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 13:56:49 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/06 23:02:57 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+
+typedef t_cdist		(*t_combine_fn)(t_cdist, t_cdist, float);
+
+typedef struct s_combine_op
+{
+	t_combine_fn	func;
+	float			smoothing;
+}					t_combine_op;
+
+typedef struct s_cyl_data
+{
+	t_vec3			pos;
+	t_vec3			orient;
+	double			dims[2];
+	t_colour		color;
+}					t_cyl_data;
 
 typedef struct s_ambient
 {
@@ -68,4 +84,5 @@ int					parse_plane(char *line, t_scene *scene, int line_num);
 int					parse_cylinder(char *line, t_scene *scene, int line_num);
 void				dump_scene(t_scene *s);
 
+int					parse_combine(char *str, t_combine_op *op);
 #endif

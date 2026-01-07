@@ -4,6 +4,7 @@ a.out
 .*.sw*
 *.o
 miniRT
+.DS_Store
 *.data*
 *.rt
 *.txt
