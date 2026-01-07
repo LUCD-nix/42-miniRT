@@ -21,6 +21,9 @@
 # define EPS_NORMAL 0.001f
 # define SCREEN_LEN_X 1.0f
 # define BACKGROUND ((t_colour){0, 0, 0, 0})
+# define SHADOW_DIST_MIN 0.01f
+# define SHADOW_INT_MIN .0001f
+# define SHADOW_DIST_MAX 100.f
 
 typedef struct s_camera
 {
@@ -43,6 +46,6 @@ t_vec3		get_uv(size_t px, size_t py, t_camera *cam);
 t_vec3		get_normal(t_vec3 point, t_shapes *objs);
 t_camera	camera_setup(t_vec3 position, t_vec3 view_dir, float h_fov);
 t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs);
-float	soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point);
+float		soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point);
 
 #endif // RENDERING_H

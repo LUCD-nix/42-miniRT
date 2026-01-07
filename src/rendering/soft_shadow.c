@@ -10,49 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "rendering.h"
-#define SHADOW_DIST_MIN 0.1f
-#define SHADOW_DIST_MAX 10.f
 
-// see if we can get these to work, same principle but reduces the banding
-// and has a darker penumbra
-// inline float	soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point)
-// {
-// 	t_vec3	direction;
-// 	float	intensity;
-// 	float	delta;
-// 	float	t;
-// 	int		i;
-//
-// 	direction = norm3(diff3(light.position, point));
-// 	intensity = 1.0f;
-// 	t = SHADOW_DIST_MIN;
-// 	i = -1;
-// 	while (++i < 256 && t < SHADOW_DIST_MAX)
-// 	{
-// 		delta = scene(add3(point, fmult3(direction, t)), objs).dist;
-// 		intensity = fminf( intensity, delta / (light.radius * t));
-// 		// TODO : maybe use clamp here
-// 		t += fabsf(delta);
-// 		if (intensity<-1.0 || t > SHADOW_DIST_MAX)
-// 			break;
-// 	}
-// 	intensity = fmaxf(intensity, -1.0);
-// 	return (0.25*(1.0 + intensity) * (1.0 + intensity) * (2.0 - intensity));
-// }
-float soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point)
+float	soft_shadow(t_point_light light, t_shapes *objs, t_vec3 point)
 {
-	float res = 1.0;
-	float t = SHADOW_DIST_MIN;
-	float k = light.radius;
+	float	intensity;
+	float	previous;
+	float	walk;
+	float	delta;
+	float	y;
+	float	d;
+	t_vec3	direction;
 
-	t_vec3 direction = norm3(diff3(light.position, point));
-	for( int i=0; i<256 && t<SHADOW_DIST_MAX; i++ )
+	intensity = 1.0;
+	walk = SHADOW_DIST_MIN;
+	direction = norm3(diff3(light.position, point));
+	int i = -1;
+	previous = 1e20;
+	while (++i < 256 && walk < SHADOW_DIST_MAX && intensity > SHADOW_INT_MIN)
 	{
-		float h = scene(add3(point, fmult3(direction, t)), objs).dist;
-		if( h < SURFACE_DIST )
-			return 0.0;
-		res = fminf( res, k*h/t );
-		t += h;
+		delta = scene(add3(point, fmult3(direction, walk)), objs).dist;
+		if (delta < SURFACE_DIST)
+			return (0.f);
+		y = (i == 0) ? 0.f : delta * delta / (2.0f * previous);
+		d = sqrtf(delta * delta - y * y);
+		intensity = fminf(intensity,
+				d / (light.radius * fmaxf(0.0f, walk - y)));
+		previous = delta;
+		walk += delta;
 	}
-	return res;
+	float normal = dot3(direction, get_normal(point, objs));
+	return(fminf(fmaxf(intensity, 0.f), 1.0f) * normal);
 }
