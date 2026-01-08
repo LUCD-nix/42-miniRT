@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:33:11 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 10:31:13 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/08 22:47:44 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ static int	dispatch_line(char *line, t_scene *scene, int line_num)
 		return (parse_plane(line, scene, line_num));
 	else if (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
 		return (parse_cylinder(line, scene, line_num));
+	//bo x,y,z  rx,ry,rz  lx,ly,lz  R,G,B  [combine_op]
+	else if (line[0] == 'b' && line[1] == 'o' && line[2] == ' ')
+		return (parse_box(line, scene, line_num));
 	else
 		return (printf("Error\nLine %d: Unknown identifier\n", line_num), 0);
 }

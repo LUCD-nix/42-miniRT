@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:08:09 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 23:02:57 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/08 22:47:03 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ typedef struct s_camera_data
 	double			fov;
 }					t_camera_data;
 
+typedef struct s_box_data
+{
+	t_vec3			pos;
+	t_vec3			rot;
+	t_vec3			dims;
+	t_colour		color;
+}					t_box_data;
+
 typedef struct s_light
 {
 	t_vec3			position;
@@ -85,4 +93,6 @@ int					parse_cylinder(char *line, t_scene *scene, int line_num);
 void				dump_scene(t_scene *s);
 
 int					parse_combine(char *str, t_combine_op *op);
+int					parse_box(char *line, t_scene *scene, int line_num);
+
 #endif
