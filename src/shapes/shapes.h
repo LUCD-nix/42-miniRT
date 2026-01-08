@@ -37,10 +37,10 @@ struct s_box
 
 struct s_cylinder
 {
-	t_mat3	alignment;
+	t_vec3	base;
+	t_vec3	axis;
 	t_vec3	position;
 	float	radius;
-	float	height;
 };
 
 struct s_plane
