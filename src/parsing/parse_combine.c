@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:50:39 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 22:51:34 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/08 12:31:13 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_combine(char *str, t_combine_op *op)
 		return (1);
 	if (str[0] == 's')
 		return (parse_smooth_combine(str, op));
-	if (str[0] && str[1] == '\0')
+	if (str[0] && (str[1] == '\0' || str[1] == '\n'))
 	{
 		op->func = get_combine_func(str[0]);
 		if (!op->func)
