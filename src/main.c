@@ -35,10 +35,15 @@ static void	setup_lights(t_scene *parsed, t_shapes *objs)
 	};
 	objs->point = (t_point_light){
 		.position = parsed->light.position,
-		.radius = 10.f,
+		.radius = 0.1f,
 		.intensity = parsed->light.brightness,
 		.colour = parsed->light.color
 	};
+	printf("light pos: { %f, %f, %f }\n",
+		parsed->light.position.x,
+		parsed->light.position.y,
+		parsed->light.position.z);
+	printf("light intensity: %f\n", parsed->light.brightness);
 }
 
 static t_camera	setup_camera(t_scene *parsed)

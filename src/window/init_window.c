@@ -9,7 +9,7 @@
 /*   Updated: 2026/01/07 00:00:42 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "window.h"
 
 void	init_window(void **mlx_ptr, void **window_ptr, t_img	*data)
 {

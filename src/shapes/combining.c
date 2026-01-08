@@ -26,7 +26,7 @@ t_cdist	op_substraction(t_cdist d1, t_cdist d2, float k)
 	// max (d1, -d2)
 	if (d1.dist > -d2.dist)
 		return (d1);
-	return (d2);
+	return ((t_cdist){-d2.dist, d2.colour});
 }
 
 t_cdist	op_intersection(t_cdist d1, t_cdist d2, float k)
