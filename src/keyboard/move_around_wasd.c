@@ -30,7 +30,7 @@ void	move_around_wasd(int keycode, t_scene_lucas *scene)
 	t_vec3		delta;
 
 	cam = scene->cam;
-	delta = (t_vec3) {0.f, 0.f, 0.f};
+	delta = (t_vec3){0.f, 0.f, 0.f};
 	if (keycode == KB_W)
 		delta = (t_vec3){MOVE_DELTA, 0.f, 0.f};
 	if (keycode == KB_S)

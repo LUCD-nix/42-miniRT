@@ -48,7 +48,7 @@
 		(t_vec3){SIN_PI_12, COS_PI_12, 0},\
 		(t_vec3){0, 0, 1},\
 	}\
-}\
+}
 
 # define ROT_MAT_POS_PITCH (t_mat3) {\
 	.rows = {\
@@ -56,7 +56,7 @@
 		(t_vec3){-SIN_PI_12, COS_PI_12, 0},\
 		(t_vec3){0, 0, 1},\
 	}\
-}\
+}
 
 # define ROT_MAT_NEG_YAW (t_mat3) {\
 	.rows = {\
@@ -64,7 +64,7 @@
 		(t_vec3){0, 1, 0},\
 		(t_vec3){-SIN_PI_12, 0, COS_PI_12},\
 	}\
-}\
+}
 
 # define ROT_MAT_POS_YAW (t_mat3) {\
 	.rows = {\
@@ -72,7 +72,7 @@
 		(t_vec3){0, 1, 0},\
 		(t_vec3){SIN_PI_12, 0, COS_PI_12},\
 	}\
-}\
+}
 
 # define ROT_MAT_POS_ROLL (t_mat3) {\
 	.rows = {\
@@ -80,7 +80,7 @@
 		(t_vec3){0, COS_PI_12, SIN_PI_12},\
 		(t_vec3){0, -SIN_PI_12, COS_PI_12},\
 	}\
-}\
+}
 
 # define ROT_MAT_NEG_ROLL (t_mat3) {\
 	.rows = {\
@@ -88,7 +88,7 @@
 		(t_vec3){0, COS_PI_12, -SIN_PI_12},\
 		(t_vec3){0, SIN_PI_12, COS_PI_12},\
 	}\
-}\
+}
 
 typedef struct s_scene_lucas
 {

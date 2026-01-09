@@ -18,7 +18,7 @@ t_vec3	get_uv(size_t px, size_t py, t_camera *cam)
 	float	u;
 	float	v;
 
-	u = ((float) px / SCREEN_X - 0.5)  * (16.f / 9.f);
+	u = ((float) px / SCREEN_X - 0.5) * (16.f / 9.f);
 	v = (float) py / SCREEN_Y - 0.5;
 	res = fmult3(cam->u_3, u);
 	res = diff3(res, fmult3(cam->v_3, v));

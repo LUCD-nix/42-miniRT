@@ -57,13 +57,11 @@ union u_shape
 	struct s_plane		plane;
 };
 
-
 typedef struct s_cdist
 {
 	float		dist;
 	t_colour	colour;
 }	t_cdist;
-
 
 // typedef enum e_shape_tag
 // {

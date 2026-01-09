@@ -9,26 +9,25 @@
 /*   Updated: 2026/01/06 11:37:22 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include"keyboard.h"
+#include "keyboard.h"
 
 static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
 {
 	float	focus_dist;
 	t_mat3	rotated;
-	
+
 	focus_dist = length3(cam->screen_plane);
 	rotated = mat3mat3(to_rotate, (t_mat3){
-		.rows = {
+			.rows = {
 			norm3(cam->screen_plane),
 			cam->v_3,
 			cam->u_3
-		}
-	});
+		}});
 	cam->screen_plane = fmult3(rotated.rows[0], focus_dist);
 	cam->v_3 = rotated.rows[1];
 	cam->u_3 = rotated.rows[2];
 }
+
 void	look_around_arrows(int keycode, t_scene_lucas *scene)
 {
 	t_camera	*cam;

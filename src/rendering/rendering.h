@@ -22,7 +22,7 @@
 # define SCREEN_LEN_X 1.0f
 # define BACKGROUND ((t_colour){0, 0, 0, 0})
 # define SHADOW_DIST_MIN 0.01f
-# define SHADOW_INT_MIN .0001f
+# define SHADOW_I_MIN .0001f
 # define SHADOW_DIST_MAX 100.f
 
 typedef struct s_camera
@@ -35,7 +35,17 @@ typedef struct s_camera
 	t_vec3	v_3;
 }	t_camera;
 
-
+typedef struct s_soft_shadows
+{
+	t_vec3	direction;
+	float	intensity;
+	float	previous;
+	float	walk;
+	float	delta;
+	float	y;
+	float	d;
+	float	normal;
+}	t_soft_shadows;
 
 void		put_pixel_to_img(t_img *data, int x, int y, t_colour colour);
 void		fast_render(t_shapes *objs, t_camera *cam, t_img *data);

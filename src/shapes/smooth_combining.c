@@ -16,7 +16,7 @@ t_colour	rgb_lerp(t_cdist o1, t_cdist o2)
 	t_colour	a;
 	t_colour	b;
 	t_colour	res;
-	float	frac;
+	float		frac;
 
 	frac = (1 + (o1.dist - o2.dist) / (o2.dist + o1.dist)) / 2;
 	a = o1.colour;

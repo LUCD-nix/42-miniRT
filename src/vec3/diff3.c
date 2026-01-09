@@ -14,7 +14,7 @@
 
 t_vec3	diff3(t_vec3 a, t_vec3 b)
 {
-	t_vec3 res;
+	t_vec3	res;
 
 	res = (t_vec3){
 		a.x - b.x,

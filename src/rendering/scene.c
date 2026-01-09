@@ -22,7 +22,7 @@ t_cdist	scene(t_vec3	point, t_shapes *objs)
 	res.dist = objs->sdfs[0](point, objs->shapes[0]);
 	res.colour = objs->colours[0];
 	i = 0;
-	while(++i < objs->n_shapes)
+	while (++i < objs->n_shapes)
 	{
 		temp.dist = objs->sdfs[i](point, objs->shapes[i]);
 		temp.colour = objs->colours[i];

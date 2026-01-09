@@ -15,6 +15,5 @@ float	sphere_sdf(t_vec3 p, union u_shape shape)
 {
 	// NOTE : this is not exactly as in the reference articles, might change
 	// if performance is bad;
-
 	return (length3(diff3(p, shape.sphere.position)) - shape.sphere.radius);
 }

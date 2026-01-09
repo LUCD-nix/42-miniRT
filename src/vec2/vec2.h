@@ -29,7 +29,7 @@ t_vec2	abs2(t_vec2 v);
 float	dot2(t_vec2 a, t_vec2 b);
 t_vec2	add2(t_vec2 a, t_vec2 b);
 t_vec2	max2f(t_vec2 v, float s);
-t_vec2	fmult2(t_vec2 v,float s);
+t_vec2	fmult2(t_vec2 v, float s);
 t_vec2	norm2(t_vec2 v);
 t_vec2	diff2(t_vec2 a, t_vec2 b);
 

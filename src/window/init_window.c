@@ -33,5 +33,5 @@ void	init_window(void **mlx_ptr, void **window_ptr, t_img	*data)
 		exit(EXIT_FAILURE);
 	}
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-		&data->line_length, &data->endian);
+			&data->line_length, &data->endian);
 }

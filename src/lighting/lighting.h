@@ -39,4 +39,3 @@ typedef struct s_ambient_light
 t_colour	add_light_to_obj(t_colour a, t_colour b, float intensity);
 
 #endif // LIGHTING_H
-

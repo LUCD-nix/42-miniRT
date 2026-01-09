@@ -19,4 +19,3 @@ float	dot3(t_vec3 a, t_vec3 b)
 		+ a.z * b.z
 	);
 }
-

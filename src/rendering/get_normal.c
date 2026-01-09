@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 #include "rendering.h"
 
+	// eps needs to be bigger than SURFACE_DIST for sdf(pos) ~= 0
+	// Could go to a more accurate impl (Inigo Quilez)
+	// but would require more sdf calls
 t_vec3	get_normal(t_vec3 point, t_shapes *objs)
 {
 	t_vec3	normal;
 	float	eps;
 
-	// Needs to be bigger than SURFACE_DIST for sdf(pos) ~= 0
-	// Could go to a more accurate impl (Inigo Quilez)
-	// but would require more sdf calls
 	eps = EPS_NORMAL;
 	normal = (t_vec3){
 		scene(add3(point, (t_vec3){eps, 0, 0}), objs).dist,

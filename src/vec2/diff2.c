@@ -14,7 +14,7 @@
 
 t_vec2	diff2(t_vec2 a, t_vec2 b)
 {
-	t_vec2 res;
+	t_vec2	res;
 
 	res = (t_vec2){
 		a.x - b.x,

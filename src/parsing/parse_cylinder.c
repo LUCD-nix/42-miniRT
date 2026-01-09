@@ -39,9 +39,9 @@ static void	fill_cylinder(t_scene *scene, t_cyl_data *data, t_combine_op *op)
 
 	idx = scene->shapes.n_shapes;
 	scene->shapes.shapes[idx].cylinder.position = data->pos;
-	scene->shapes.shapes[idx].cylinder.alignment = ID_MAT3;
+	scene->shapes.shapes[idx].cylinder.axis = (t_vec3) {0.0f, 0.0f, 5.f};
 	scene->shapes.shapes[idx].cylinder.radius = (float)(data->dims[0] / 2.0);
-	scene->shapes.shapes[idx].cylinder.height = (float)data->dims[1];
+	scene->shapes.shapes[idx].cylinder.base = (t_vec3) {0.f, 0.f, -2.5f};
 	scene->shapes.colours[idx] = data->color;
 	scene->shapes.sdfs[idx] = &cylinder_sdf;
 	scene->shapes.combine[idx] = op->func;
