@@ -4,11 +4,11 @@ Engine:
     https://iquilezles.org/articles/distgradfunctions3d/
     (sphere & cylinder available);
     - [ ] consider updating lerp to be better;
-    - [ ] fix cylinder - sphere unsmooth being just a hole
 
 Done/abandoned:
 
     - [x] Start work on smooth shading, using raymarching
+    - [x] fix cylinder - sphere unsmooth being just a hole
     - [x] fix weird colour on cube in demo
         - https://iquilezles.org/articles/rmshadows/
     - [x] Implement a camera struct and make get_uv use it;
