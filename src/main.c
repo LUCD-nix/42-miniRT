@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 	void		*mlx;
 	void		*window;
 	t_img		data;
-	t_scene		*parsed;
+	t_scene		parsed;
 	t_camera	cam;
 	t_scene_lucas		scene;
 	clock_t		start;
@@ -71,18 +71,18 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf("Usage: %s <scene.rt>\n", argv[0]), 1);
-	parsed = parse_scene(argv[1]);
-	if (!parsed)
+	
+	if (!parse_scene(argv[1], &parsed))
 		return (1);
 	init_window(&mlx, &window, &data);
-	setup_lights(parsed, &parsed->shapes);
-	cam = setup_camera(parsed);
+	setup_lights(&parsed, &parsed.shapes);
+	cam = setup_camera(&parsed);
 	printf("Camera pos: { %f, %f, %f }\n",
 		cam.camera_pos.x, cam.camera_pos.y, cam.camera_pos.z);
 	printf("Screen plane: { %f, %f, %f }\n",
 		cam.screen_plane.x, cam.screen_plane.y, cam.screen_plane.z);
 	scene = (t_scene_lucas){
-		.objs = &parsed->shapes,
+		.objs = &parsed.shapes,
 		.cam = &cam,
 		.mlx = mlx,
 		.mlx_window = window,
@@ -90,11 +90,10 @@ int	main(int argc, char **argv)
 	};
 	register_mlx_callbacks(window, &scene);
 	start = clock();
-	full_render(&parsed->shapes, &cam, &data);
+	full_render(&parsed.shapes, &cam, &data);
 	end = clock();
 	printf("Rendered in %lf seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 	mlx_put_image_to_window(mlx, window, data.img, 0, 0);
 	mlx_loop(mlx);
-	free(parsed);
 	return (0);
 }

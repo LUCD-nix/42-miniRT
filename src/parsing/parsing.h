@@ -81,7 +81,7 @@ double				ft_atof_safe(const char *str, double *result);
 int					parse_vec3(char *str, t_vec3 *vec);
 int					parse_color(char *str, t_colour *color);
 void				free_split(char **split);
-t_scene				*parse_scene(const char *filename);
+int	 				parse_scene(const char *filename, t_scene *parse);
 
 int					parse_ambient(char *line, t_scene *scene, int line_num);
 int					parse_camera(char *line, t_scene *scene, int line_num);
@@ -90,7 +90,6 @@ int					parse_light(char *line, t_scene *scene, int line_num);
 int					parse_sphere(char *line, t_scene *scene, int line_num);
 int					parse_plane(char *line, t_scene *scene, int line_num);
 int					parse_cylinder(char *line, t_scene *scene, int line_num);
-void				dump_scene(t_scene *s);
 
 int					parse_combine(char *str, t_combine_op *op);
 int					parse_box(char *line, t_scene *scene, int line_num);

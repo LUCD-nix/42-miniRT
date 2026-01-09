@@ -12,17 +12,6 @@
 
 #include "parsing.h"
 
-static t_scene	*init_scene(void)
-{
-	t_scene	*scene;
-
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-		return (NULL);
-	ft_memset(scene, 0, sizeof(t_scene));
-	return (scene);
-}
-
 static int	dispatch_line(char *line, t_scene *scene, int line_num)
 {
 	if (line[0] == 'A' && line[1] == ' ')
@@ -73,21 +62,18 @@ static int	parse_lines(int fd, t_scene *scene)
 	return (1);
 }
 
-t_scene	*parse_scene(const char *filename)
+int	 parse_scene(const char *filename, t_scene *scene)
 {
 	int		fd;
-	t_scene	*scene;
 
+	*scene = (t_scene){0};
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (printf("Error\nCannot open file: %s\n", filename), NULL);
-	scene = init_scene();
-	if (!scene)
-		return (close(fd), NULL);
+		return (printf("Error\nCannot open file: %s\n", filename), 0);
 	if (!parse_lines(fd, scene))
-		return (close(fd), free(scene), NULL);
+		return (close(fd), 0);
 	close(fd);
 	if (!validate_scene(scene))
-		return (free(scene), NULL);
-	return (scene);
+		return (0);
+	return (1);
 }
