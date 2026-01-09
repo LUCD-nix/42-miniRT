@@ -38,7 +38,8 @@ static void	fill_box(t_scene *scene, t_box_data *data, t_combine_op *op)
 
 	idx = scene->shapes.n_shapes;
 	scene->shapes.shapes[idx].box.position = data->pos;
-	scene->shapes.shapes[idx].box.rotation = ID_MAT3;
+	scene->shapes.shapes[idx].box.rotation = rot_mat3(data->rot.x,
+			data->rot.y, data->rot.z);
 	scene->shapes.shapes[idx].box.lx = (float)data->dims.x;
 	scene->shapes.shapes[idx].box.ly = (float)data->dims.y;
 	scene->shapes.shapes[idx].box.lz = (float)data->dims.z;

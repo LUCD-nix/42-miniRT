@@ -48,6 +48,7 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/window/init_window.c \
 	src/parsing/ft_atof_safe.c \
 	src/parsing/parse_ambient.c \
+	src/parsing/parse_box.c \
 	src/parsing/parse_camera.c \
 	src/parsing/parse_color.c \
 	src/parsing/parse_cylinder.c \
