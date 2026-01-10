@@ -9,7 +9,6 @@
 /*   Updated: 2026/01/06 11:39:09 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "keyboard.h"
 
 int	keyboard_dispatch(int keycode, void *param)
@@ -18,9 +17,8 @@ int	keyboard_dispatch(int keycode, void *param)
 
 	scene = (t_scene_lucas *) param;
 	if (keycode == KB_ENTER)
-		return (full_render(scene->objs, scene->cam, scene->img),
-			mlx_put_image_to_window(scene->mlx, scene->mlx_window,
-				scene->img->img, 0, 0),
+		return (full_render(scene->objs, scene->cam,
+					scene->mlx_window, scene->mlx),
 			0);
 	if (keycode == KB_ESCAPE)
 		free_mlx_and_exit(scene);

@@ -24,7 +24,15 @@ static size_t	get_ms_time_diff(struct timeval start_time)
 	return (res);
 }
 
-void	full_render(t_shapes *objs, t_camera *cam, t_img *data)
+static unsigned int colour_to_uint(t_colour colour)
+{
+	return (((unsigned int)colour.r << 16)
+			+ ((unsigned int)colour.g << 8)
+			+ (unsigned int)colour.b);
+	
+}
+
+void	full_render(t_shapes *objs, t_camera *cam, void *mlx_window, void *mlx)
 {
 	size_t			i;
 	size_t			j;
@@ -45,7 +53,7 @@ void	full_render(t_shapes *objs, t_camera *cam, t_img *data)
 		{
 			rd = get_uv(j, i, cam);
 			temp = raymarch(cam->camera_pos, rd, objs);
-			put_pixel_to_img(data, j, i, temp);
+			mlx_pixel_put(mlx, mlx_window, j, i, colour_to_uint(temp));
 		}
 	}
 	j = get_ms_time_diff(start_time);

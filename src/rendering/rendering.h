@@ -49,7 +49,8 @@ typedef struct s_soft_shadows
 
 void		put_pixel_to_img(t_img *data, int x, int y, t_colour colour);
 void		fast_render(t_shapes *objs, t_camera *cam, t_img *data);
-void		full_render(t_shapes *objs, t_camera *cam, t_img *data);
+void		full_render(t_shapes *objs, t_camera *cam,
+		void *mlx_window, void *mlx);
 t_cdist		scene(t_vec3 point, t_shapes *objs);
 t_colour	apply_lights(t_shapes *objs, t_vec3 ray, t_cdist colour_dist);
 t_vec3		get_uv(size_t px, size_t py, t_camera *cam);
