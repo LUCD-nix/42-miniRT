@@ -62,7 +62,7 @@ static int	parse_lines(int fd, t_scene *scene)
 	return (1);
 }
 
-int	 parse_scene(const char *filename, t_scene *scene)
+int	parse_scene(const char *filename, t_scene *scene)
 {
 	int		fd;
 
