@@ -9,14 +9,8 @@
 /*   Updated: 2026/01/06 23:53:33 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "lighting/lighting.h"
-#include "vec3/vec3.h"
-#include "shapes/shapes.h"
-#include "rendering/rendering.h"
 #include "parsing/parsing.h"
 #include "../minilibx-linux/mlx.h"
-#include <stdio.h>
-#include <math.h>
 #include "window/window.h"
 #include "keyboard/keyboard.h"
 
