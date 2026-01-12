@@ -50,21 +50,21 @@ int	main(int argc, char **argv)
 	t_img					data;
 	t_scene					parsed;
 	t_camera				cam;
-	static t_scene_lucas	scene = (t_scene_lucas){0};
+	static t_runtime	runtime = (t_runtime){0};
 
 	if (argc != 2)
 		return (printf("Usage: %s <scene.rt>\n", argv[0]), 1);
 	if (!parse_scene(argv[1], &parsed))
 		return (1);
-	init_window(&scene.mlx, &scene.mlx_window, &data);
+	init_window(&runtime.mlx, &runtime.mlx_window, &data);
 	setup_lights(&parsed, &parsed.shapes);
 	cam = setup_camera(&parsed);
-	scene.objs = &parsed.shapes;
-	scene.cam = &cam;
-	scene.img = &data;
-	register_mlx_callbacks(scene.mlx_window, &scene);
-	full_render(&parsed.shapes, &cam, &data);
-	mlx_put_image_to_window(scene.mlx, scene.mlx_window, data.img, 0, 0);
-	mlx_loop(scene.mlx);
+	runtime.objs = &parsed.shapes;
+	runtime.cam = &cam;
+	runtime.img = &data;
+	register_mlx_callbacks(runtime.mlx_window, &runtime);
+	full_render(&parsed.shapes, &cam, runtime.mlx_window, runtime.mlx);
+	mlx_put_image_to_window(runtime.mlx, runtime.mlx_window, data.img, 0, 0);
+	mlx_loop(runtime.mlx);
 	return (0);
 }

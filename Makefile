@@ -5,6 +5,7 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/keyboard/look_around_arrows.c \
 	src/keyboard/move_around_wasd.c \
 	src/keyboard/register_mlx_callbacks.c \
+	src/keyboard/rotation_matrices.c \
 	src/lighting/add_light_to_obj.c \
 	src/main.c \
 	src/mat3/mat3mat3.c \

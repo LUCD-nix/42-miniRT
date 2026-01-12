@@ -14,9 +14,9 @@
 
 int	keyboard_dispatch(int keycode, void *param)
 {
-	t_scene_lucas	*scene;
+	t_runtime	*scene;
 
-	scene = (t_scene_lucas *) param;
+	scene = (t_runtime *) param;
 	if (keycode == KB_ENTER)
 		return (full_render(scene->objs, scene->cam, scene->img),
 			mlx_put_image_to_window(scene->mlx, scene->mlx_window,

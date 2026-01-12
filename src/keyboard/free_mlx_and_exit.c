@@ -12,15 +12,15 @@
 
 #include "keyboard.h"
 
-int	free_mlx_and_exit(t_scene_lucas *scene)
+int	free_mlx_and_exit(t_runtime *runtime)
 {
 	void	*mlx;
 	t_img	*image_data;
 
-	image_data = scene->img;
-	mlx = scene->mlx;
+	image_data = runtime->img;
+	mlx = runtime->mlx;
 	mlx_destroy_image(mlx, image_data->img);
-	mlx_destroy_window(mlx, scene->mlx_window);
+	mlx_destroy_window(mlx, runtime->mlx_window);
 	mlx_destroy_display(mlx);
 	free(mlx);
 	exit(EXIT_SUCCESS);

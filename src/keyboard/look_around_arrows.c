@@ -28,23 +28,23 @@ static inline void	rotate_view(t_mat3 to_rotate, t_camera *cam)
 	cam->u_3 = rotated.rows[2];
 }
 
-void	look_around_arrows(int keycode, t_scene_lucas *scene)
+void	look_around_arrows(int keycode, t_runtime *runtime)
 {
 	t_camera	*cam;
 	t_mat3		to_rotate;
 
-	cam = scene->cam;
+	cam = runtime->cam;
 	if (keycode == KB_UP)
-		to_rotate = ROT_MAT_POS_PITCH;
+		to_rotate = rot_pitch(PI_12);
 	if (keycode == KB_DOWN)
-		to_rotate = ROT_MAT_NEG_PITCH;
+		to_rotate = rot_pitch(-PI_12);
 	if (keycode == KB_LEFT)
-		to_rotate = ROT_MAT_POS_YAW;
+		to_rotate = rot_yaw(PI_12);
 	if (keycode == KB_RIGHT)
-		to_rotate = ROT_MAT_NEG_YAW;
+		to_rotate = rot_yaw(-PI_12);
 	if (keycode == KB_Q)
-		to_rotate = ROT_MAT_NEG_ROLL;
+		to_rotate = rot_roll(-PI_12);
 	if (keycode == KB_E)
-		to_rotate = ROT_MAT_POS_ROLL;
+		to_rotate = rot_roll(PI_12);
 	rotate_view(to_rotate, cam);
 }
