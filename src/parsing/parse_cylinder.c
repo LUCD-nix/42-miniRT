@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 23:08:00 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 23:02:04 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/12 17:18:04 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ static int	parse_cyl_dims(char **tokens, t_cyl_data *data)
 
 static void	fill_cylinder(t_scene *scene, t_cyl_data *data, t_combine_op *op)
 {
-	int	idx;
+	int		idx;
+	t_vec3	axis;
 
 	idx = scene->shapes.n_shapes;
+	axis = fmult3(data->orient, (float)data->dims[1]);
 	scene->shapes.shapes[idx].cylinder.position = data->pos;
-	scene->shapes.shapes[idx].cylinder.axis = (t_vec3){0.0f, 0.0f, 5.f};
+	scene->shapes.shapes[idx].cylinder.axis = axis;
 	scene->shapes.shapes[idx].cylinder.radius = (float)(data->dims[0] / 2.0);
-	scene->shapes.shapes[idx].cylinder.base = (t_vec3){0.f, 0.f, -2.5f};
+	scene->shapes.shapes[idx].cylinder.base = add3(data->pos, fmult3(axis,
+				0.5f));
 	scene->shapes.colours[idx] = data->color;
 	scene->shapes.sdfs[idx] = &cylinder_sdf;
 	scene->shapes.combine[idx] = op->func;
