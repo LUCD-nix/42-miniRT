@@ -1,5 +1,6 @@
 Engine:
 
+    - [ ] Fix cylinder rotation (always around origin when it shouldnt be)
     - [ ] Consider using the analytical gradients for shading normals
     https://iquilezles.org/articles/distgradfunctions3d/
     (sphere & cylinder available);
