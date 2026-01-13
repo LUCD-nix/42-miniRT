@@ -32,6 +32,6 @@ t_colour	raymarch(t_vec3 origin, t_vec3 direction, t_shapes *objs)
 			break ;
 	}
 	if (i == MAX_STEPS)
-		return (BACKGROUND);
+		return (((t_colour){0, 0, 0, 0}));
 	return (apply_lights(objs, ray, colour_dist));
 }

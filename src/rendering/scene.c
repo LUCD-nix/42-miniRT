@@ -17,8 +17,6 @@ t_cdist	scene(t_vec3	point, t_shapes *objs)
 	t_cdist	temp;
 	t_cdist	res;
 
-	// NOTE : we have to ensure there's always at least a single obj to draw
-	// but doing so here could be too expensive;
 	res.dist = objs->sdfs[0](point, objs->shapes[0]);
 	res.colour = objs->colours[0];
 	i = 0;

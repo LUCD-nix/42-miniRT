@@ -26,7 +26,6 @@ static int	dispatch_line(char *line, t_scene *scene, int line_num)
 		return (parse_plane(line, scene, line_num));
 	else if (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
 		return (parse_cylinder(line, scene, line_num));
-	//bo x,y,z  rx,ry,rz  lx,ly,lz  R,G,B  [combine_op]
 	else if (line[0] == 'b' && line[1] == 'o' && line[2] == ' ')
 		return (parse_box(line, scene, line_num));
 	else

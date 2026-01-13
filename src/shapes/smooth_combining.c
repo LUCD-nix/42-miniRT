@@ -45,18 +45,18 @@ t_cdist	op_smooth_union(t_cdist o1, t_cdist o2, float k)
 	});
 }
 
+// return (-op_smooth_union(-d1, d2, k));
 t_cdist	op_smooth_substraction(t_cdist o1, t_cdist o2, float k)
 {
-	// return (-op_smooth_union(-d1, d2, k));
 	return ((t_cdist){
 		-smooth_min(-o1.dist, o2.dist, k),
 		o1.colour
 	});
 }
 
+// return (-op_smooth_union(-d1, -d2, k));
 t_cdist	op_smooth_intersection(t_cdist o1, t_cdist o2, float k)
 {
-	// return (-op_smooth_union(-d1, -d2, k));
 	return ((t_cdist){
 		-smooth_min(-o1.dist, -o2.dist, k),
 		rgb_lerp(o1, o2),

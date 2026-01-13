@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	t_img					data;
 	t_scene					parsed;
 	t_camera				cam;
-	static t_runtime	runtime = (t_runtime){0};
+	static t_runtime		runtime = (t_runtime){0};
 
 	if (argc != 2)
 		return (printf("Usage: %s <scene.rt>\n", argv[0]), 1);
@@ -58,6 +58,10 @@ int	main(int argc, char **argv)
 		return (1);
 	init_window(&runtime.mlx, &runtime.mlx_window, &data);
 	setup_lights(&parsed, &parsed.shapes);
+	if (parsed.shapes.n_shapes == 0)
+	{
+		return (printf("Error: number of objects to draw is < 1\n"), 1);
+	}
 	cam = setup_camera(&parsed);
 	runtime.objs = &parsed.shapes;
 	runtime.cam = &cam;

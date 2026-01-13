@@ -20,14 +20,6 @@
 // {
 // 	t_vec3 rows[3];
 // }	t_mat3;
-//
-# define ID_MAT3 (t_mat3) {\
-	.rows = {\
-		(t_vec3){1, 0, 0},\
-		(t_vec3){0, 1, 0},\
-		(t_vec3){0, 0, 1},\
-	}\
-}
 
 t_mat3	mat3mat3(t_mat3 a, t_mat3 b);
 t_vec3	mat3vec(t_mat3 a, t_vec3 v);

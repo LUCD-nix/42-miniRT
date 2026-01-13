@@ -20,7 +20,6 @@
 # define SURFACE_DIST 0.00001f
 # define EPS_NORMAL 0.001f
 # define SCREEN_LEN_X 1.0f
-# define BACKGROUND ((t_colour){0, 0, 0, 0})
 # define SHADOW_DIST_MIN 0.01f
 # define SHADOW_I_MIN .0001f
 # define SHADOW_DIST_MAX 100.f
