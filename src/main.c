@@ -1,12 +1,12 @@
 /* ************************************************************************** */
-/*                                                                            */
+
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2026/01/06 23:53:33 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/13 14:41:18 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing/parsing.h"
@@ -48,7 +48,7 @@ static t_camera	setup_camera(t_scene *parsed)
 int	main(int argc, char **argv)
 {
 	t_img					data;
-	t_scene					parsed;
+	static t_scene			parsed = (t_scene){0};
 	t_camera				cam;
 	static t_runtime		runtime = (t_runtime){0};
 

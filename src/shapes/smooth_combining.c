@@ -6,7 +6,7 @@
 /*   By: lucorrei <lucorrei@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:00:23 by lucorrei          #+#    #+#             */
-/*   Updated: 2025/12/12 17:00:33 by lucorrei         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:44:17 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "shapes.h"
@@ -28,7 +28,7 @@ t_colour	rgb_lerp(t_cdist o1, t_cdist o2)
 	return (res);
 }
 
-inline float	smooth_min(float d1, float d2, float k)
+static inline float	smooth_min(float d1, float d2, float k)
 {
 	float	h;
 
