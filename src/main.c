@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	runtime.cam = &cam;
 	runtime.img = &data;
 	register_mlx_callbacks(runtime.mlx_window, &runtime);
-	full_render(&parsed.shapes, &cam, runtime.mlx_window, runtime.mlx);
+	full_render(&parsed.shapes, &cam, &data);
 	mlx_put_image_to_window(runtime.mlx, runtime.mlx_window, data.img, 0, 0);
 	mlx_loop(runtime.mlx);
 	return (0);

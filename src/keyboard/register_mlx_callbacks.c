@@ -16,5 +16,5 @@ void	register_mlx_callbacks(void *mlx_window, t_runtime *runtime)
 {
 	mlx_key_hook(mlx_window, &keyboard_dispatch, runtime);
 	mlx_hook(mlx_window, 17, STRUCTURE_NOTIFY_MASK,
-		&free_mlx_and_exit, scene);
+		&free_mlx_and_exit, runtime);
 }
