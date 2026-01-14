@@ -43,8 +43,7 @@ static void	fill_cylinder(t_scene *scene, t_cyl_data *data, t_combine_op *op)
 	scene->shapes.shapes[idx].cylinder.position = data->pos;
 	scene->shapes.shapes[idx].cylinder.axis = axis;
 	scene->shapes.shapes[idx].cylinder.radius = (float)(data->dims[0] / 2.0);
-	scene->shapes.shapes[idx].cylinder.base = diff3(fmult3(axis,
-				0.5f), data->pos);
+	scene->shapes.shapes[idx].cylinder.base = fmult3(axis, -0.5f);
 	scene->shapes.colours[idx] = data->color;
 	scene->shapes.sdfs[idx] = &cylinder_sdf;
 	scene->shapes.combine[idx] = op->func;
