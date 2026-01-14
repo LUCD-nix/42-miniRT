@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:33:11 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 22:47:44 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/14 14:41:52 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,12 @@ static int	parse_lines(int fd, t_scene *scene)
 int	parse_scene(const char *filename, t_scene *scene)
 {
 	int		fd;
+	int		len;
 
 	*scene = (t_scene){0};
+	len = ft_strlen(filename);
+	if (ft_strncmp(".rt", filename + len - 3, 3))
+		return (printf("Error\nFilename must end with .rt\n"), 0);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error\nCannot open file: %s\n", filename), 0);
