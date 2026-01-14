@@ -16,7 +16,7 @@
 # include "../shapes/shapes.h"
 # include "../window/window.h"
 # include "../lighting/lighting.h"
-# define MAX_STEPS 100
+# define MAX_STEPS 200
 # define SURFACE_DIST 0.00001f
 # define EPS_NORMAL 0.001f
 # define SCREEN_LEN_X 1.0f
