@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:22:10 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 22:50:25 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:11:05 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ int	parse_sphere(char *line, t_scene *scene, int line_num)
 	t_combine_op	op;
 
 	if (scene->shapes.n_shapes >= MAX_SHAPES)
-		return (printf("Error\nLine %d: Max shapes reached\n", line_num), 0);
+		return (print_error(line_num, "Max shapes reached"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (0);
 	if (!validate_sphere_tokens(tokens, &pos, &diam, &color))
-		return (printf("Error\nLine %d: Invalid sphere data\n", line_num),
+		return (print_error(line_num, "Invalid sphere data"),
 			free_split(tokens), 0);
 	if (!parse_combine(tokens[4], &op))
-		return (printf("Error\nLine %d: Invalid combine op\n", line_num),
-			free_split(tokens), 0);
+		return (print_error(line_num, "Invalid combine op"), free_split(tokens),
+			0);
 	fill_sphere(scene, pos, diam, color);
 	fill_sphere_combine(scene, &op);
 	return (free_split(tokens), 1);

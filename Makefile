@@ -58,6 +58,7 @@ CFILES = src/keyboard/free_mlx_and_exit.c \
 	src/parsing/parse_scene.c \
 	src/parsing/parse_sphere.c \
 	src/parsing/parse_vec3.c \
+	src/parsing/print_error.c \
 	src/parsing/utils_split.c \
 	src/parsing/parse_combine.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 23:08:00 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/12 17:18:04 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:16:00 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,21 @@ int	parse_cylinder(char *line, t_scene *scene, int line_num)
 	t_combine_op	op;
 
 	if (scene->shapes.n_shapes >= MAX_SHAPES)
-		return (printf("Error\nLine %d: Max shapes reached\n", line_num), 0);
+		return (print_error(line_num, "Max shapes reached"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens || !tokens[0] || !tokens[1] || !tokens[2] || !tokens[3]
 		|| !tokens[4] || !tokens[5])
-		return (free_split(tokens), 0);
+		return (print_error(line_num, "Invalid number of tokens"),
+			free_split(tokens), 0);
 	if (!parse_cyl_geom(tokens, &data))
-		return (printf("Error\nLine %d: Invalid cylinder geom\n", line_num),
+		return (print_error(line_num, "Invalid cylinder geom"),
 			free_split(tokens), 0);
 	if (!parse_cyl_dims(tokens, &data))
-		return (printf("Error\nLine %d: Invalid cylinder dims\n", line_num),
+		return (print_error(line_num, "Invalid cylinder dims"),
 			free_split(tokens), 0);
 	if (!parse_combine(tokens[6], &op))
-		return (printf("Error\nLine %d: Invalid combine op\n", line_num),
-			free_split(tokens), 0);
+		return (print_error(line_num, "Invalid combine op"), free_split(tokens),
+			0);
 	fill_cylinder(scene, &data, &op);
 	return (free_split(tokens), 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 21:06:24 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 11:59:10 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:01:32 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ static int	validate_light_tokens(char **tokens, double *brightness,
 		t_scene *scene, int line_num)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		return (0);
+		return (print_error(line_num, "Invalid number of tokens"), 0);
 	if (!parse_vec3(tokens[1], &scene->light.position))
-		return (printf("Error\nLine %d: Invalid coordinates\n", line_num), 0);
+		return (print_error(line_num, "Invalid coordinates"), 0);
 	if (!ft_atof_safe(tokens[2], brightness))
-		return (0);
+		return (print_error(line_num, "Invalid brightness"), 0);
 	if (*brightness < 0.0 || *brightness > 1.0)
-		return (printf("Error\nLine %d: Brightness must be in [0.0, 1.0]\n",
-				line_num), 0);
+		return (print_error(line_num, "Brightness must be in [0.0, 1.0]"), 0);
 	if (!parse_color(tokens[3], &scene->light.color))
-		return (printf("Error\nLine %d: Invalid color format\n", line_num), 0);
+		return (print_error(line_num, "Invalid color format"), 0);
 	return (1);
 }
 

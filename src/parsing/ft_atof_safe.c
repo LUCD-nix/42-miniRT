@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof_safe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:13:19 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 11:58:54 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:29:41 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ double	ft_atof_safe(const char *str, double *result)
 	i = skip_spaces(str, i);
 	if (str[i] != '\0' || !has_digit)
 		return (0);
-	*result = sign * (value + fraction);
+	value = sign * (value + fraction);
+	if (isinf(value) || isnan(value))
+		return (0);
+	*result = value;
 	return (1);
 }

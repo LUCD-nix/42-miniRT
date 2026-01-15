@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 20:44:00 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 11:58:59 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 13:56:57 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static int	validate_camera_tokens(char **tokens, t_camera_data *cam,
 		int line_num)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		return (0);
+		return (print_error(line_num, "Invalid number of tokens"), 0);
 	if (!parse_vec3(tokens[1], &cam->position))
-		return (printf("Error\nLine %d: Invalid position\n", line_num), 0);
+		return (print_error(line_num, "Invalid position"), 0);
 	if (!parse_vec3(tokens[2], &cam->orientation))
-		return (printf("Error\nLine %d: Invalid orientation\n", line_num), 0);
+		return (print_error(line_num, "Invalid orientation"), 0);
 	if (!ft_atof_safe(tokens[3], &cam->fov))
-		return (printf("Error\nLine %d: Invalid FOV format\n", line_num), 0);
+		return (print_error(line_num, "Invalid FOV format"), 0);
 	if (cam->fov < 0.0 || cam->fov > 180.0)
-		return (printf("Error\nLine %d: FOV [0, 180]\n", line_num), 0);
+		return (print_error(line_num, "FOV [0, 180]"), 0);
 	return (1);
 }
 

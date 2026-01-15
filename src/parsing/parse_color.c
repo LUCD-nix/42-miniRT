@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:41 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/06 23:56:29 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:11:24 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	parse_color(char *str, t_colour *color)
 		success = 0;
 	if (success)
 		*color = (t_colour){0xFF, (int)r, (int)g, (int)b};
+	// checker message d erreur pour couleur
 	return (free_split(rgb), success);
 }

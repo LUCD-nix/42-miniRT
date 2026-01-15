@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambient.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:41:56 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 11:58:57 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:11:30 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,14 @@ static int	validate_ambient_tokens(char **tokens, double *ratio,
 		t_scene *scene, int line_num)
 {
 	if (!tokens[0] || !tokens[1] || !tokens[2] || tokens[3])
-		return (0);
+		return (print_error(line_num, "Invalid number of tokens"), 0);
 	if (!ft_atof_safe(tokens[1], ratio))
-		return (0);
+		return (print_error(line_num, "Invalid ratio"), 0);
 	if (*ratio < 0.0 || *ratio > 1.0)
-	{
-		printf("Error\nLine %d: Ambient ratio must be in [0.0, 1.0]\n",
-			line_num);
-		return (0);
-	}
+		return (print_error(line_num, "Ambient ratio must be in [0.0, 1.0]"),
+			0);
 	if (!parse_color(tokens[2], &scene->ambient.color))
-	{
-		printf("Error\nLine %d: Invalid color format\n", line_num);
-		return (0);
-	}
+		return (print_error(line_num, "Invalid color format"), 0);
 	return (1);
 }
 

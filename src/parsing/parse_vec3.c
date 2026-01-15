@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vec3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:08:44 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 11:59:18 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:19:29 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	parse_vec3(char *str, t_vec3 *vec)
 		vec->x = (float)x;
 		vec->y = (float)y;
 		vec->z = (float)z;
+		// checker message d erreur pour vec3
 	}
-	return (free_split(coords), success);
+	return(free_split(coords), success);
 }

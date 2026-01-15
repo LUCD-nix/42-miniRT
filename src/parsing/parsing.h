@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:08:09 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/08 22:47:03 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/01/15 14:30:06 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../../libft/libft.h"
 # include "../shapes/shapes.h"
 # include "../vec3/vec3.h"
+# include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/stat.h>
@@ -94,4 +95,6 @@ int					parse_cylinder(char *line, t_scene *scene, int line_num);
 int					parse_combine(char *str, t_combine_op *op);
 int					parse_box(char *line, t_scene *scene, int line_num);
 
-#endif
+void				print_error(int line_num, char *msg);
+
+#endif // PARSING_H
