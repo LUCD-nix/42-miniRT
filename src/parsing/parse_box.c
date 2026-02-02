@@ -28,7 +28,7 @@ static int	parse_box_dims(char **tokens, t_box_data *data)
 	if (data->dims.x <= 0.0 || data->dims.y <= 0.0 || data->dims.z <= 0.0)
 		return (0);
 	if (!parse_color(tokens[4], &data->color))
-		return (print_error(line_num, "Invalid color format"), 0);
+		return (0);
 	return (1);
 }
 

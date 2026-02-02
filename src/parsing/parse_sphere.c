@@ -20,9 +20,9 @@ static int	validate_sphere_tokens(char **tokens, t_vec3 *pos, double *diam,
 	if (!parse_vec3(tokens[1], pos))
 		return (0);
 	if (!ft_atof_safe(tokens[2], diam) || *diam <= 0.0)
-		return (print_error(line_num, "Invalid diameter"), 0);
+		return (0);
 	if (!parse_color(tokens[3], color))
-		return (print_error(line_num, "Invalid color format"), 0);
+		return (0);
 	return (1);
 }
 

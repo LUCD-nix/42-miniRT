@@ -37,7 +37,6 @@ int	parse_vec3(char *str, t_vec3 *vec)
 		vec->x = (float)x;
 		vec->y = (float)y;
 		vec->z = (float)z;
-		// checker message d erreur pour vec3
 	}
 	return(free_split(coords), success);
 }
