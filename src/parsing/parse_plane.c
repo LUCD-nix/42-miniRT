@@ -61,7 +61,7 @@ int	parse_plane(char *line, t_scene *scene, int line_num)
 		return (print_error(line_num, "Max shapes reached"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
-		return (0);
+		return (print_error(line_num, "Malloc error"), 0);
 	if (!validate_plane_tokens(tokens, &coord, &normal, &color))
 		return (print_error(line_num, "Invalid plane data"), free_split(tokens),
 			0);

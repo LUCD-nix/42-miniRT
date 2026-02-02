@@ -59,9 +59,12 @@ int	parse_box(char *line, t_scene *scene, int line_num)
 	if (scene->shapes.n_shapes >= MAX_SHAPES)
 		return (print_error(line_num, "Max shapes reached"), 0);
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[0] || !tokens[1] || !tokens[2] || !tokens[3]
+	if (!tokens)
+		return (print_error(line_num, "Malloc error"), 0);
+	if (!tokens[0] || !tokens[1] || !tokens[2] || !tokens[3]
 		|| !tokens[4])
-		return (free_split(tokens), 0);
+		return (print_error(line_num, "Wrong # of tokens"),
+			free_split(tokens), 0);
 	if (!parse_box_geom(tokens, &data))
 		return (print_error(line_num, "Invalid box geom"),
 			free_split(tokens), 0);

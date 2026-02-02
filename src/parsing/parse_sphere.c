@@ -64,8 +64,8 @@ int	parse_sphere(char *line, t_scene *scene, int line_num)
 		return (print_error(line_num, "Invalid sphere data"),
 			free_split(tokens), 0);
 	if (!parse_combine(tokens[4], &op))
-		return (print_error(line_num, "Invalid combine op"), free_split(tokens),
-			0);
+		return (print_error(line_num, "Invalid combine op"),
+			free_split(tokens), 0);
 	fill_sphere(scene, pos, diam, color);
 	fill_sphere_combine(scene, &op);
 	return (free_split(tokens), 1);

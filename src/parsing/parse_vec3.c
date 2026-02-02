@@ -38,5 +38,5 @@ int	parse_vec3(char *str, t_vec3 *vec)
 		vec->y = (float)y;
 		vec->z = (float)z;
 	}
-	return(free_split(coords), success);
+	return (free_split(coords), success);
 }
