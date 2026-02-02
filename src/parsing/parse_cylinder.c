@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 23:08:00 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/15 14:16:00 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:02:18 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ static int	parse_cyl_geom(char **tokens, t_cyl_data *data)
 {
 	if (!parse_vec3(tokens[1], &data->pos))
 		return (0);
-	if (!parse_vec3(tokens[2], &data->orient))
+	if (!parse_vecnorm(tokens[2], &data->orient))
 		return (0);
+	if (length3(data->orient) <= 0)
+	{
+		printf("Error\nDirection must be > 0\n");
+		return (0);
+	}
 	data->orient = norm3(data->orient);
 	return (1);
 }

@@ -6,11 +6,12 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:08:44 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/15 14:19:29 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:02:16 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <math.h>
 
 int	parse_vec3(char *str, t_vec3 *vec)
 {
@@ -39,4 +40,16 @@ int	parse_vec3(char *str, t_vec3 *vec)
 		vec->z = (float)z;
 	}
 	return (free_split(coords), success);
+}
+
+int	parse_vecnorm(char *str, t_vec3 *vec)
+{
+	int	result;
+
+	if (!parse_vec3(str, vec))
+		return (0);
+	result = fabsf(length3(*vec)) - 1 < .010;
+	if (result != 1)
+		return (0);
+	return (1);
 }

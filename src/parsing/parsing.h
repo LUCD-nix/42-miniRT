@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:08:09 by hlongin           #+#    #+#             */
-/*   Updated: 2026/01/15 14:30:06 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 15:43:54 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../../libft/libft.h"
 # include "../shapes/shapes.h"
 # include "../vec3/vec3.h"
-# include <math.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -80,6 +80,7 @@ typedef struct s_scene
 
 double				ft_atof_safe(const char *str, double *result);
 int					parse_vec3(char *str, t_vec3 *vec);
+int					parse_vecnorm(char *str, t_vec3 *vec);
 int					parse_color(char *str, t_colour *color);
 void				free_split(char **split);
 int					parse_scene(const char *filename, t_scene *parse);

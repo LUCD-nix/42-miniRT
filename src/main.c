@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:08:48 by lucorrei          #+#    #+#             */
-/*   Updated: 2026/01/13 14:41:18 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 15:57:17 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "parsing/parsing.h"
+
 #include "../minilibx-linux/mlx.h"
 #include "window/window.h"
 #include "keyboard/keyboard.h"
+#include "parsing/parsing.h"
 
 static void	setup_lights(t_scene *parsed, t_shapes *objs)
 {
@@ -56,12 +57,12 @@ int	main(int argc, char **argv)
 		return (printf("Usage: %s <scene.rt>\n", argv[0]), 1);
 	if (!parse_scene(argv[1], &parsed))
 		return (1);
-	init_window(&runtime.mlx, &runtime.mlx_window, &data);
-	setup_lights(&parsed, &parsed.shapes);
 	if (parsed.shapes.n_shapes == 0)
 	{
 		return (printf("Error: number of objects to draw is < 1\n"), 1);
 	}
+	init_window(&runtime.mlx, &runtime.mlx_window, &data);
+	setup_lights(&parsed, &parsed.shapes);
 	cam = setup_camera(&parsed);
 	runtime.objs = &parsed.shapes;
 	runtime.cam = &cam;
