@@ -57,19 +57,19 @@ int	parse_box(char *line, t_scene *scene, int line_num)
 	t_combine_op	op;
 
 	if (scene->shapes.n_shapes >= MAX_SHAPES)
-		return (printf("Error\nLine %d: Max shapes reached\n", line_num), 0);
+		return (print_error(line_num, "Max shapes reached"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens || !tokens[0] || !tokens[1] || !tokens[2] || !tokens[3]
 		|| !tokens[4])
 		return (free_split(tokens), 0);
 	if (!parse_box_geom(tokens, &data))
-		return (printf("Error\nLine %d: Invalid box geom\n", line_num),
+		return (print_error(line_num, "Invalid box geom"),
 			free_split(tokens), 0);
 	if (!parse_box_dims(tokens, &data))
-		return (printf("Error\nLine %d: Invalid box dims\n", line_num),
+		return (print_error(line_num, "Invalid box dims"),
 			free_split(tokens), 0);
 	if (!parse_combine(tokens[5], &op))
-		return (printf("Error\nLine %d: Invalid combine op\n", line_num),
+		return (print_error(line_num, "Invalid combine op"),
 			free_split(tokens), 0);
 	fill_box(scene, &data, &op);
 	return (free_split(tokens), 1);

@@ -34,8 +34,7 @@ int	parse_light(char *line, t_scene *scene, int line_num)
 	double	brightness;
 
 	if (scene->has_light)
-		return (printf("Error\nLine %d: Duplicate light definition\n",
-				line_num), 0);
+		return (print_error(line_num, "Duplicate light definition"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (0);

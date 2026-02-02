@@ -29,7 +29,7 @@ static int	dispatch_line(char *line, t_scene *scene, int line_num)
 	else if (line[0] == 'b' && line[1] == 'o' && line[2] == ' ')
 		return (parse_box(line, scene, line_num));
 	else
-		return (printf("Error\nLine %d: Unknown identifier\n", line_num), 0);
+		return (print_error(line_num, "Unknown identifier"), 0);
 }
 
 static int	validate_scene(t_scene *scene)

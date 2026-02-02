@@ -33,7 +33,7 @@ int	parse_ambient(char *line, t_scene *scene, int line_num)
 	double	ratio;
 
 	if (scene->has_ambient)
-		return (printf("Error\nLine %d: Duplicate ambient light\n", line_num),
+		return (print_error(line_num, "Duplicate ambient light"),
 			0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)

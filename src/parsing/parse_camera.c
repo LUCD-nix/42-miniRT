@@ -34,7 +34,7 @@ int	parse_camera(char *line, t_scene *scene, int line_num)
 	t_camera_data	temp;
 
 	if (scene->has_camera)
-		return (printf("Error\nLine %d: Duplicate camera\n", line_num), 0);
+		return (print_error(line_num, "Duplicate camera"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (0);
