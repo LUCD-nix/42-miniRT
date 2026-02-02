@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:07:33 by hlongin           #+#    #+#             */
-/*   Updated: 2026/02/02 15:47:30 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:41:58 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	validate_plane_tokens(char **tokens, t_vec3 *coord, t_vec3 *normal,
 		return (0);
 	if (!parse_vec3(tokens[1], coord))
 		return (0);
-	if (length3(*coord) <= 0)
-		return (0);
 	if (!parse_vecnorm(tokens[2], normal))
 		return (0);
 	*normal = norm3(*normal);
+	if (length3(*normal) <= 0)
+		return (0);
 	if (!parse_color(tokens[3], color))
 		return (0);
 	return (1);

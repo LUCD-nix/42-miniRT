@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:08:44 by hlongin           #+#    #+#             */
-/*   Updated: 2026/02/02 16:02:16 by hlongin          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:40:01 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	parse_vecnorm(char *str, t_vec3 *vec)
 
 	if (!parse_vec3(str, vec))
 		return (0);
-	result = fabsf(length3(*vec)) - 1 < .010;
-	if (result != 1)
-		return (0);
-	return (1);
+	result = fabsf(length3(*vec) - 1.f) < 0.01f;
+	return (result);
 }
