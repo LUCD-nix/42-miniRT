@@ -37,7 +37,7 @@ int	parse_ambient(char *line, t_scene *scene, int line_num)
 			0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
-		return (0);
+		return (print_error(line_num, "Malloc error"), 0);
 	if (!validate_ambient_tokens(tokens, &ratio, scene, line_num))
 		return (free_split(tokens), 0);
 	scene->ambient.ratio = (float)ratio;

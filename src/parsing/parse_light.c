@@ -37,7 +37,7 @@ int	parse_light(char *line, t_scene *scene, int line_num)
 		return (print_error(line_num, "Duplicate light definition"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
-		return (0);
+		return (print_error(line_num, "Malloc error"), 0);
 	if (!validate_light_tokens(tokens, &brightness, scene, line_num))
 		return (free_split(tokens), 0);
 	scene->light.brightness = (float)brightness;

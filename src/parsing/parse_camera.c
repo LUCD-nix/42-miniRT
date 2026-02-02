@@ -37,7 +37,7 @@ int	parse_camera(char *line, t_scene *scene, int line_num)
 		return (print_error(line_num, "Duplicate camera"), 0);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
-		return (0);
+		return (print_error(line_num, "Malloc error"), 0);
 	if (!validate_camera_tokens(tokens, &temp, line_num))
 		return (free_split(tokens), 0);
 	scene->camera.position = temp.position;

@@ -21,11 +21,9 @@ int	parse_color(char *str, t_colour *color)
 	int		success;
 
 	rgb = ft_split(str, ',');
-	if (!rgb)
-		return (0);
 	success = 1;
-	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		success = 0;
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		return (printf("Error\nColour: missing or invalid tokens\n"), 0);
 	else if (!ft_atof_safe(rgb[0], &r))
 		success = 0;
 	else if (!ft_atof_safe(rgb[1], &g))
@@ -34,8 +32,8 @@ int	parse_color(char *str, t_colour *color)
 		success = 0;
 	if (success && (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255))
 		success = 0;
-	if (success)
-		*color = (t_colour){0xFF, (int)r, (int)g, (int)b};
-	// checker message d erreur pour couleur
+	if (!success)
+		return (printf("Error\nColour: invalid tokens\n"), 0);
+	*color = (t_colour){0xFF, (int)r, (int)g, (int)b};
 	return (free_split(rgb), success);
 }
